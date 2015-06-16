@@ -6,6 +6,7 @@ using namespace std;
 
 // This will zero initiate the scores
 Deck::Deck() {
+    allCards_ = new Card*[CARDS_IN_DECK];
     Card* newCard;
     int i = 0;
     for (unsigned suit=CLUB; suit <= SPADE; ++suit) {
@@ -22,6 +23,11 @@ Deck::~Deck() {
     for (int i = 0; i<CARDS_IN_DECK ; i++) {
         delete allCards_[i];
     }
+    delete allCards_;
+}
+
+Card** Deck::getDeck() const {
+    return allCards_;
 }
 
 void Deck::newRound() {

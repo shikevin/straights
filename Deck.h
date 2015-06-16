@@ -10,10 +10,11 @@ public:
     ~Deck();
     void play(Card * card);
     void newRound();
-private:
+    Card** getDeck() const;
     static const int CARDS_IN_DECK = 52;
-    Card* allCards_ [CARDS_IN_DECK]; // should be a shuffle-able array
-    Card* onTable_ [SPADE][KING]; // should be already sorted
+private:
+    Card** allCards_; // should be a shuffle-able array
+    Card* onTable_ [SPADE + 1][KING + 1]; // should be already sorted
 };
 
 #endif
