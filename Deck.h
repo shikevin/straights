@@ -13,6 +13,7 @@ public:
     Card** getDeck() const;
     static const int CARDS_IN_DECK = 52;
 private:
+    void shuffleCards();
     Card** allCards_; // should be a shuffle-able array
     Card* onTable_ [SPADE + 1][KING + 1]; // should be already sorted
 };

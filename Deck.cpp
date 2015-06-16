@@ -2,6 +2,7 @@
 #include "Card.h"
 #include <string>
 #include <assert.h>
+#include <random>
 using namespace std;
 
 // This will zero initiate the scores
@@ -13,7 +14,6 @@ Deck::Deck() {
         for (unsigned rank=ACE; rank <= KING; ++rank) {
             newCard = new Card(Suit(suit), Rank(rank));
             allCards_[i] = newCard;
-            onTable_[suit][rank] = NULL;
             i++;
         }
     }
@@ -31,10 +31,27 @@ Card** Deck::getDeck() const {
 }
 
 void Deck::newRound() {
+    shuffleCards();
+
     for (unsigned suit=CLUB; suit <= SPADE; ++suit) {
         for (unsigned rank=ACE; rank<= KING; ++rank) {
             onTable_[suit][rank] = NULL;
         }
+    }
+}
+
+void Deck::shuffleCards() {
+    int seed = 0;
+    static mt19937 rng(seed);
+
+    int n = CARDS_IN_DECK;
+
+    while ( n > 1 ) {
+        int k = (int) (rng() % n);
+        --n;
+        Card *c = allCards_[n];
+        allCards_[n] = allCards_[k];
+        allCards_[k] = c;
     }
 }
 
