@@ -1,9 +1,9 @@
 #ifndef _HUMANPLAYER_
 #define _HUMANPLAYER_
 
-#include <vector>
 #include <string>
 #include "Player.h"
+#include "ComputerPlayer.h"
 
 
 //behaves like the oberserver header

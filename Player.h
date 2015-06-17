@@ -22,11 +22,13 @@ public:
 	void addCardToHand(Card&);
 
 protected:
+	static int id;
 	void removeCardFromHand(Card&);
 	std::string type;
 	std::vector<Card*> cardsInHand;
 	std::vector<Card*> cardsDiscarded;
 	int playerID; //0...3
+	int generateID();
 };
 
 

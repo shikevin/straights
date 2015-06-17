@@ -23,11 +23,12 @@ void HumanPlayer::quit() {
 ComputerPlayer HumanPlayer::ragequit() {
 	//create computer player with current deck
 	//outside code replaces human player with this new computer player
-	ComputerPlayer * replacementPlayer = ComputerPlayer(this->getPlayerType(), this->getPlayerID());
+	ComputerPlayer replacementPlayer = ComputerPlayer(this->getPlayerType(), this->getPlayerID());
 	//initilize computerplayer's arrays
 	for(int i =0; i < this->cardsInHand.size(); i++) {
-		replacementPlayer->addCardToHand(this->cardsInHand[i]);
+		replacementPlayer.addCardToHand(*(this->cardsInHand[i]));
 	}
+	return replacementPlayer;
 
 }
 

@@ -1,7 +1,6 @@
 #ifndef _COMPUTERPLAYER_
 #define _COMPUTERPLAYER_
 
-#include <vector>
 #include <string>
 #include "Player.h"
 
