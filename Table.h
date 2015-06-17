@@ -6,6 +6,9 @@
 /*
 responsible for controlling aspects of the game
 
+Table has a list of players
+Table has a scoreboard
+Table has a list of cards on the table
  */
 
 

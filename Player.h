@@ -27,8 +27,8 @@ protected:
 	std::string type;
 	std::vector<Card*> cardsInHand;
 	std::vector<Card*> cardsDiscarded;
-	int playerID; //0...3
-	int generateID();
+	int playerID; //1..4
+	int generateID();  //returns a number between 1..4
 };
 
 

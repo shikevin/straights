@@ -20,7 +20,23 @@ int main () {
         assert (c=='h' || c =='c');
         choices += c;
     }
-    cout << choices;
+    cout << choices << endl;
+
+    //starts the new game
+    //initializes a table that is the braniac
+    //finds the player that has 7 Spades
+    //loop begins:
+    //print functions called depending on ttpe of player
+    //play()
+    //discard()
+    //quit()
+    //ragequit()
+    //deck()
+
+
 
     return 0;
 }
+
+void initilizePlayers(string instream) {
+} 
