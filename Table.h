@@ -28,6 +28,7 @@ private:
     static const Card startCard;
 	std::vector<Player*> playersInGame;
 	Deck deck;
+    bool isGameOver();
     void distributeCards();
     int findStartingPlayer();
 	void initializePlayers(std::string); // string passed in is "choices" from main

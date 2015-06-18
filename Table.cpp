@@ -5,6 +5,7 @@
 #include "Print.h"
 #include <vector>
 #include <string>
+
 using namespace std;
 
 const Card Table::startCard = Card(SPADE, SEVEN);
@@ -34,19 +35,6 @@ void Table::distributeCards() {
     }
 }
 
-void Table::startGame(string choices) {
-    // start up the game
-    initializePlayers(choices);
-    deck.newRound();
-    distributeCards();
-    int start = findStartingPlayer();
-
-    Print information = Print();
-    information.notifyStart(start);
-
-     
-}
-
 void Table::initializePlayers(string choices) {
 	for(int i = 0; i < choices.size(); i++) {
 		if(choices.at(i) == 'h') {
@@ -57,4 +45,28 @@ void Table::initializePlayers(string choices) {
 			playersInGame.push_back(&computer);
 		}
 	}
+}
+
+bool Table::isGameOver() {
+    for (int i=0; i<playersInGame.size(); i++) {
+        if (scoreboard.getCurrentScore(i) + scoreboard.getOldScore(i) >= 80) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Table::startGame(string choices) {
+    // start up the game
+    initializePlayers(choices);
+    deck.newRound();
+    distributeCards();
+    int start = findStartingPlayer();
+
+    Print information = Print();
+    information.notifyStart(start);
+
+    while (!isGameOver()) {
+        // play the game
+    }
 }
