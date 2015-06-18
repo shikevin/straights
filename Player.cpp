@@ -4,7 +4,6 @@
 using namespace std;
 
 
-static int Player::id = 1;
 
 Player::Player(string playerType, int id) : type(playerType), playerID(id) {
 	cardsInHand.reserve(13);
@@ -44,19 +43,6 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 void Player::addCardToHand(Card& newCard) {
 	Card * temp = &newCard;
 	cardsInHand.push_back(temp);
-}
-
-int generateID() {
-
-	int temp = id;
-	
-	if(id == 4) {
-		id = 1;
-	} else {
-		id++;
-	}
-
-	return temp;
 }
 
 

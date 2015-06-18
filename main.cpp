@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#include "Table.h"
+
 using namespace std;
 
     
@@ -33,10 +35,13 @@ int main () {
     //ragequit()
     //deck()
 
+    Table braniac = Table();
+    braniac.initilizePlayers(choices);
+    int playerWithSpades braniac.findPlayerWithSpades();
+
+    cout << "A new round begins. It's player " + playerWithSpades + "'s turn to play." << endl;
+
 
 
     return 0;
 }
-
-void initilizePlayers(string instream) {
-} 

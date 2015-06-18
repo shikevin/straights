@@ -13,6 +13,7 @@ class Player {
 
 public:
 	explicit Player(std::string, int); //type of player and player's round get passed in to initialize a player
+	//~Player(); //default is good enough?
 		
 	virtual void play(Card&) = 0;		
 	void discard(Card&);
@@ -22,13 +23,11 @@ public:
 	void addCardToHand(Card&);
 
 protected:
-	static int id;
 	void removeCardFromHand(Card&);
 	std::string type;
 	std::vector<Card*> cardsInHand;
 	std::vector<Card*> cardsDiscarded;
 	int playerID; //1..4
-	int generateID();  //returns a number between 1..4
 };
 
 
