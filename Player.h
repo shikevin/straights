@@ -12,6 +12,7 @@
 class Player {
 
 public:
+	explicit Player(std::string); //type of player and player's round get passed in to initialize a player
 	explicit Player(std::string, int); //type of player and player's round get passed in to initialize a player
 	//~Player(); //default is good enough?
 		
@@ -27,7 +28,8 @@ protected:
 	std::string type;
 	std::vector<Card*> cardsInHand;
 	std::vector<Card*> cardsDiscarded;
-	int playerID; //1..4
+    static int next_;
+	int playerID; //0..3
 };
 
 

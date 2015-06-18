@@ -12,7 +12,7 @@
 class HumanPlayer : public Player {
 
 public:
-	HumanPlayer(std::string, int); //type of player and player's round get passed in to initialize a player
+	HumanPlayer(std::string); //type of player and player's round get passed in to initialize a player
 	void play(Card&);
 	//void discard(Card&);
 	void quit();

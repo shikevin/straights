@@ -31,12 +31,6 @@ private:
     void distributeCards();
     int findStartingPlayer();
 	void initializePlayers(std::string); // string passed in is "choices" from main
-	static int id;
-	friend int generateID();
-
-
-
-
 };
 
 

@@ -9,21 +9,6 @@ using namespace std;
 
 const Card Table::startCard = Card(SPADE, SEVEN);
 
-int Table::id = 1;
-
-int generateID() {
-
-	int temp = Table::id;
-	
-	if(Table::id == 4) {
-		Table::id = 1;
-	} else {
-		Table::id++;
-	}
-
-	return temp;
-}
-
 Table::Table() {
 	playersInGame.reserve(4);
 	scoreboard = Scoreboard();
@@ -58,15 +43,17 @@ void Table::startGame(string choices) {
 
     Print information = Print();
     information.notifyStart(start);
+
+     
 }
 
 void Table::initializePlayers(string choices) {
 	for(int i = 0; i < choices.size(); i++) {
 		if(choices.at(i) == 'h') {
-			HumanPlayer human = HumanPlayer("h",generateID());
+			HumanPlayer human = HumanPlayer("h");
 			playersInGame.push_back(&human);
 		} else {
-			ComputerPlayer computer = ComputerPlayer("c",generateID());
+			ComputerPlayer computer = ComputerPlayer("c");
 			playersInGame.push_back(&computer);
 		}
 	}

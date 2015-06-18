@@ -4,7 +4,9 @@
 using namespace std;
 
 
-ComputerPlayer::ComputerPlayer(string playerType, int id) : Player(playerType,id) {}
+ComputerPlayer::ComputerPlayer(string playerType) : Player(playerType) {}
+
+ComputerPlayer::ComputerPlayer(string playerType, int id) : Player(playerType, id) {}
 
 
 void ComputerPlayer::play(Card& playThis) {

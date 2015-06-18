@@ -3,7 +3,13 @@
 #include <string>
 using namespace std;
 
+int Player::next_ = 0;
 
+Player::Player(string playerType) : type(playerType) {
+    playerID = next_++;
+	cardsInHand.reserve(13);
+	cardsDiscarded.reserve(13);
+}
 
 Player::Player(string playerType, int id) : type(playerType), playerID(id) {
 	cardsInHand.reserve(13);
@@ -43,8 +49,3 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
 }
-
-
-
-
-

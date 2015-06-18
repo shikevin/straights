@@ -11,6 +11,7 @@
 class ComputerPlayer : public Player {
 
 public:
+	ComputerPlayer(std::string); //type of player and player's round get passed in to initialize a player
 	ComputerPlayer(std::string, int); //type of player and player's round get passed in to initialize a player
 	void play(Card&);
 };

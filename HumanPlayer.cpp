@@ -4,7 +4,7 @@
 using namespace std;
 
 
-HumanPlayer::HumanPlayer(string playerType, int id) : Player(playerType,id) {}
+HumanPlayer::HumanPlayer(string playerType) : Player(playerType) {}
 
 
 void HumanPlayer::play(Card& playThis) {
