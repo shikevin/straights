@@ -36,7 +36,7 @@ int main () {
     //deck()
 
     Table braniac = Table();
-    braniac.initilizePlayers(choices);
+    braniac.startGame(choices);
     int playerWithSpades braniac.findPlayerWithSpades();
 
     cout << "A new round begins. It's player " + playerWithSpades + "'s turn to play." << endl;

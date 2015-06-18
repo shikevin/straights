@@ -40,9 +40,8 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 	}
 }
 
-void Player::addCardToHand(Card& newCard) {
-	Card * temp = &newCard;
-	cardsInHand.push_back(temp);
+void Player::addCardToHand(Card *newCard) {
+	cardsInHand.push_back(newCard);
 }
 
 

@@ -19,15 +19,18 @@ Table has a deck
 
 class Table {
 public:
-	std::vector<Player*> playersInGame;
 	Scoreboard scoreboard;
-	Deck deck;
 
 	Table();
-	void initializePlayers(std::string); // string passed in is "choices" from main
-	int findPlayerWithSpades(); //returns id of player with 7 of spades
+    void startGame(std::string choices);
 
 private:
+    static const Card startCard;
+	std::vector<Player*> playersInGame;
+	Deck deck;
+    void distributeCards();
+    int findStartingPlayer();
+	void initializePlayers(std::string); // string passed in is "choices" from main
 	static int id;
 	friend int generateID();
 
