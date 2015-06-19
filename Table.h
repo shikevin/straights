@@ -21,8 +21,8 @@ Table has a deck
 class Table {
 public:
 	Scoreboard scoreboard;
-
-	Table();
+	Table(int);
+    ~Table();
     void playGame(std::string choices);
 
 private:
@@ -30,7 +30,7 @@ private:
     Command getHumanCommand(bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
-	Deck deck;
+	Deck* deck;
     bool isGameOver();
     void distributeCards();
     int findStartingPlayer();

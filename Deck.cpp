@@ -7,14 +7,13 @@
 using namespace std;
 
 // This will zero initiate the scores
-Deck::Deck() {
-    allCards_ = new Card*[CARDS_IN_DECK];
+Deck::Deck(int seed): seed_(seed) {
     Card* newCard;
     int i = 0;
     for (unsigned suit=CLUB; suit <= SPADE; ++suit) {
         for (unsigned rank=ACE; rank <= KING; ++rank) {
             newCard = new Card(Suit(suit), Rank(rank));
-            allCards_[i] = newCard;
+            allCards_.push_back(newCard);
             i++;
         }
     }
@@ -24,10 +23,9 @@ Deck::~Deck() {
     for (int i = 0; i<CARDS_IN_DECK ; i++) {
         delete allCards_[i];
     }
-    delete allCards_;
 }
 
-Card** Deck::getDeck() const {
+vector<Card*> Deck::getDeck() const {
     return allCards_;
 }
 
@@ -42,8 +40,7 @@ void Deck::newRound() {
 }
 
 void Deck::shuffleCards() {
-    int seed = 0;
-    static mt19937 rng(seed);
+    static mt19937 rng(seed_);
 
     int n = CARDS_IN_DECK;
 

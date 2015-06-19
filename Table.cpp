@@ -11,28 +11,36 @@ using namespace std;
 
 const Card Table::startCard = Card(SPADE, SEVEN);
 
-Table::Table() {
+Table::Table(int seed) {
+	deck = new Deck(seed);
 	playersInGame.reserve(4);
 	scoreboard = Scoreboard();
-	deck = Deck();
 	currentPlayer = 0;
 }
 
+Table::~Table() {
+    for (int i = 0; i < playersInGame.size(); i++) {
+        delete playersInGame[i];
+    }
+    delete deck;
+}
+
 int Table::findStartingPlayer() {
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < playersInGame.size(); i++) {
         if (playersInGame[i]->hasCard(startCard)) {
-            return i+1;
+            return i;
         }
     }
     throw "CRASH CRASH CRASH";
+
 }
 
 void Table::distributeCards() {
-    Card** shuffled = deck.getDeck();  
+    vector<Card*> shuffled = deck->getDeck();  
 
-    for (int i = 1; i <=4 ; i++) {
+    for (int i = 0; i < 4 ; i++) {
         for (int j = 1; j <=13; j++) {
-            playersInGame[i-1]->addCardToHand(shuffled[i*j-1]);
+            playersInGame[i]->addCardToHand(shuffled[(13*i)+j-1]);
         }
     }
 }
@@ -40,11 +48,11 @@ void Table::distributeCards() {
 void Table::initializePlayers(string choices) {
 	for(int i = 0; i < choices.size(); i++) {
 		if(choices.at(i) == 'h') {
-			HumanPlayer human = HumanPlayer("h");
-			playersInGame.push_back(&human);
+			HumanPlayer* human = new HumanPlayer("h");
+			playersInGame.push_back(human);
 		} else {
-			ComputerPlayer computer = ComputerPlayer("c");
-			playersInGame.push_back(&computer);
+			ComputerPlayer* computer = new ComputerPlayer("c");
+			playersInGame.push_back(computer);
 		}
 	}
 }
@@ -60,8 +68,9 @@ bool Table::isGameOver() {
 
 void Table::playGame(string choices) {
     // start up the game
+
     initializePlayers(choices);
-    deck.newRound();
+    deck->newRound();
     //
     // TO-DO reset player hands to nothing before distributing
     //
@@ -69,8 +78,8 @@ void Table::playGame(string choices) {
     int start = findStartingPlayer();
 
     Print information = Print();
+    currentPlayer = start;
     information.notifyStart(start);
-
  
     while (!isGameOver()) {
         // play the game
@@ -79,11 +88,11 @@ void Table::playGame(string choices) {
     	if(playaPointa->getPlayerType() == "h") {
 
     		//print cards on table
-    		information.printCardsOnTable(deck);
+    		information.printCardsOnTable(*deck);
     		//print player's hand
     		information.printHumanHand(*playaPointa);
     		//print legal plays
-    		bool playableCardExists = information.printLegalPlays(*playaPointa, deck);
+    		bool playableCardExists = information.printLegalPlays(*playaPointa, *deck);
             validCommand = getHumanCommand(playableCardExists);
     	} else {
     		//generate commands for computers
@@ -98,12 +107,12 @@ void Table::executeMove(Command move) {
     Player* playerPointer = playersInGame[currentPlayer];
     if (move.type == PLAY) {
         playerPointer->play(move.card);
-        deck.play(move.card);
+        deck->play(move.card);
     } else if(move.type == DISCARD) {
     	playerPointer->discard(move.card);
     	scoreboard.discard(currentPlayer,move.card);
     } else if(move.type == RAGEQUIT) {
-    	*playerPointer = playerPointer->ragequit();
+    	*playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
     }
 }
 
@@ -117,7 +126,7 @@ Command Table::getHumanCommand(bool playableCardExists) {
         while (humanInput.type == DISCARD || 
                 !playaPointa->hasCard(humanInput.card) ||
                 (humanInput.type == PLAY &&
-                 !deck.isCardPlayable(humanInput.card))) {
+                 !deck->isCardPlayable(humanInput.card))) {
             if (humanInput.type == DISCARD) {
                 cout << "You have a legal play. You may not discard." << endl;
             } else {

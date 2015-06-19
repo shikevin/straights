@@ -13,7 +13,7 @@ using namespace std;
 // main()
 //*******************
 
-int main () {
+int main (int argc, char* argv[]) {
     string choices = "";
     char c; 
     for (int i = 1; i <= 4; i++) {
@@ -36,7 +36,7 @@ int main () {
     //ragequit()
     //deck()
 
-    Table braniac = Table();
+    Table braniac = Table(atoi(argv[1]));
     braniac.playGame(choices);
     return 0;
 }

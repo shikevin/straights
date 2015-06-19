@@ -8,7 +8,7 @@ Print::Print() {
 }
 
 void Print::notifyStart(int player) {
-    cout << "A new round begins. It's player " + to_string(player) + "'s turn to play." << endl;
+    cout << "A new round begins. It's player " + to_string(player + 1) + "'s turn to play." << endl;
 
 }
 
@@ -22,6 +22,7 @@ void Print::printHumanHand(const Player& printPlayerHand) {
 	for(int i = 0; i < playerCards.size(); i++) {
 		cout << *playerCards[i] << " ";
 	}
+    cout << endl;
 }
 
 bool Print::printLegalPlays(const Player& player, const Deck& deck) {
@@ -34,5 +35,6 @@ bool Print::printLegalPlays(const Player& player, const Deck& deck) {
             legalCardExists = true;
         }
     }
+    cout << endl;
     return legalCardExists;
 }

@@ -14,7 +14,7 @@ class Player {
 public:
 	explicit Player(std::string); //type of player and player's round get passed in to initialize a player
 	explicit Player(std::string, int); //type of player and player's round get passed in to initialize a player
-	//~Player(); //default is good enough?
+	virtual ~Player() {} //default is good enough?
 		
 	std::vector<Card*> getCardsInHand() const;
 	virtual void play(Card&) = 0;		

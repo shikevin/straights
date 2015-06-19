@@ -53,6 +53,15 @@ vector<Card*> Player::getCardsInHand() const {
     return cardsInHand;
 }
 
+bool Player::hasCard(const Card& card) {
+    for (int i =0 ; i < cardsInHand.size(); i++) {
+        if (card == *cardsInHand[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Player::nullifyCardsInHand() {
 	for(int i = 0; i < cardsInHand.size(); i++) {
 		cardsInHand[i] = NULL;
