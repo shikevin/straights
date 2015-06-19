@@ -38,6 +38,7 @@ private:
 	void initializePlayers(std::string); // string passed in is "choices" from main
 	int currentPlayer;
 	void incrementCurrentPlayer();
+    Command getComputerCommand();
 };
 
 

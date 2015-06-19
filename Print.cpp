@@ -38,3 +38,9 @@ bool Print::printLegalPlays(const Player& player, const Deck& deck) {
     cout << endl;
     return legalCardExists;
 }
+
+void Print::printMove(int player, const Command& move) {
+    string moves[2] = {"plays", "discards"};
+    cout << "Player " << to_string(player + 1) << " " << 
+        moves[move.type] << " " << move.card << "." << endl;
+}

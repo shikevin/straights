@@ -4,6 +4,7 @@
 #include <string>
 #include "Player.h"
 #include "Deck.h"
+#include "Command.h"
 
 class Print {
 public:
@@ -11,6 +12,7 @@ public:
     void notifyStart(int player);
     void printCardsOnTable(const Deck&);
     void printHumanHand(const Player&);
+    void printMove(int player, const Command&);
     bool printLegalPlays(const Player&, const Deck&);
 private:
 };

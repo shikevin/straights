@@ -23,6 +23,7 @@ Table::~Table() {
         delete playersInGame[i];
     }
     delete deck;
+    delete scoreboard;
 }
 
 int Table::findStartingPlayer() {
@@ -106,12 +107,29 @@ void Table::playGame(string choices) {
                 validCommand = getHumanCommand(playableCardExists);
             } else {
                 //generate commands for computers
-            
+                validCommand = getComputerCommand();
             }
+            information.printMove(currentPlayer, validCommand);
             executeMove(validCommand);
         incrementCurrentPlayer();
         }
     }
+}
+
+Command Table::getComputerCommand() {
+    vector<Card*> playerCards = playersInGame[currentPlayer]->getCardsInHand();
+    Command computerCommand = Command();
+    for (int i = 0; i < playerCards.size(); i++) {
+        if (deck->isCardPlayable(*playerCards[i])) {
+            computerCommand.type = PLAY;
+            computerCommand.card = Card(playerCards[i]->getSuit(), playerCards[i]->getRank());
+            return computerCommand;
+        }
+    }
+    // discard if no playable card is found
+    computerCommand.type = DISCARD;
+    computerCommand.card = Card(playerCards[0]->getSuit(), playerCards[0]->getRank());
+    return computerCommand;
 }
 
 void Table::executeMove(Command move) {
