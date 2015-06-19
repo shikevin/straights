@@ -18,6 +18,7 @@ int main () {
     char c; 
     for (int i = 1; i <= 4; i++) {
         cout << "Is player " << i << " a human(h) or a computer(c)?"<<endl;
+        cout << ">";
         cin >> c;
         assert (c=='h' || c =='c');
         choices += c;
@@ -36,12 +37,6 @@ int main () {
     //deck()
 
     Table braniac = Table();
-    braniac.startGame(choices);
-    int playerWithSpades braniac.findPlayerWithSpades();
-
-    cout << "A new round begins. It's player " + playerWithSpades + "'s turn to play." << endl;
-
-
-
+    braniac.playGame(choices);
     return 0;
 }

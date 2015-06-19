@@ -1,5 +1,6 @@
 #include "Print.h"
 #include <string>
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -17,11 +18,21 @@ void Print::printCardsOnTable(const Deck& printDeck) {
 
 void Print::printHumanHand(const Player& printPlayerHand) {
 	cout << "Your hand: ";
-	for(int i = 0; i < printPlayerHand.cardsInHand.size(); i++) {
-		cout << printPlayerHand.cardsInHand[i] << " ";
+    vector<Card*> playerCards = printPlayerHand.getCardsInHand();
+	for(int i = 0; i < playerCards.size(); i++) {
+		cout << *playerCards[i] << " ";
 	}
 }
 
-void Print::printLegalPlays() {
-
+bool Print::printLegalPlays(const Player& player, const Deck& deck) {
+    bool legalCardExists = false;
+    cout << "Legal plays: ";
+    vector<Card*> playerCards = player.getCardsInHand();
+    for (int i = 0; i < playerCards.size(); i++) {
+        if (deck.isCardPlayable(*playerCards[i])) {
+            cout << *playerCards[i] << " ";
+            legalCardExists = true;
+        }
+    }
+    return legalCardExists;
 }

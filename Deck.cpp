@@ -7,8 +7,6 @@
 using namespace std;
 
 // This will zero initiate the scores
-Card* Deck::latestCard = NULL;
-
 Deck::Deck() {
     allCards_ = new Card*[CARDS_IN_DECK];
     Card* newCard;
@@ -58,10 +56,14 @@ void Deck::shuffleCards() {
     }
 }
 
-void Deck::play(Card *card) {
-    assert(card!=NULL);
-    onTable_[card->getSuit()][card->getRank()] = card;
-    latestCard = card; 
+void Deck::play(const Card& card) {
+    Card* cardPointer;
+    for (int i = 0; i < CARDS_IN_DECK; i++) {
+        if (*allCards_[i] == card) {
+            cardPointer = allCards_[i];
+        }
+    }
+    onTable_[cardPointer->getSuit()][cardPointer->getRank()] = cardPointer;
 }
 
 ostream& operator << (ostream& sout, const Deck& deck) {
@@ -73,10 +75,28 @@ ostream& operator << (ostream& sout, const Deck& deck) {
         sout << suits[i] << ": ";
         for (int j = 0; j < RANK_COUNT; j++) {
             if (deck.onTable_[i][j] != NULL) {
-                sout << ranks[deck.onTable_[i][j]->getRank()];
+                sout << ranks[deck.onTable_[i][j]->getRank()] << " ";
             }
         }
         sout << endl;
     }
     return sout;
+}
+
+bool Deck::isCardPlayable(const Card& checkCard) const {
+    if (checkCard.getRank() == SEVEN) {
+        return true;
+    } else if (checkCard.getRank() == ACE) {
+        if (onTable_[checkCard.getSuit()][TWO] != NULL) {
+            return true;
+        }
+    } else if (checkCard.getRank() == KING) {
+        if (onTable_[checkCard.getSuit()][QUEEN] != NULL) {
+            return true;
+        }
+    } else if (onTable_[checkCard.getSuit()][checkCard.getRank()-1] != NULL ||
+            onTable_[checkCard.getSuit()][checkCard.getRank()+1] != NULL) {
+        return true;
+    }
+    return false;
 }

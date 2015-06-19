@@ -49,9 +49,12 @@ void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
 }
 
+vector<Card*> Player::getCardsInHand() const {
+    return cardsInHand;
+}
+
 void Player::nullifyCardsInHand() {
 	for(int i = 0; i < cardsInHand.size(); i++) {
-		delete cardsInHand[i];
 		cardsInHand[i] = NULL;
 	}
 }
