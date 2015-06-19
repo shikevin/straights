@@ -1,6 +1,7 @@
 #include "HumanPlayer.h"
 #include  <vector>
 #include <string>
+#include <iostream>
 using namespace std;
 
 
@@ -20,13 +21,13 @@ void HumanPlayer::quit() {
 	//just break everything
 }
 
-ComputerPlayer HumanPlayer::ragequit() {
+ComputerPlayer* HumanPlayer::ragequit() {
 	//create computer player with current deck
 	//outside code replaces human player with this new computer player
-	ComputerPlayer replacementPlayer = ComputerPlayer(this->getPlayerType(), this->getPlayerID());
+	ComputerPlayer* replacementPlayer = new ComputerPlayer("c", this->getPlayerID());
 	//initilize computerplayer's arrays
 	for(int i =0; i < this->cardsInHand.size(); i++) {
-		replacementPlayer.addCardToHand((this->cardsInHand[i]));
+		replacementPlayer->addCardToHand((this->cardsInHand[i]));
 	}
 	return replacementPlayer;
 

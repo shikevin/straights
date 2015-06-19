@@ -44,3 +44,7 @@ void Print::printMove(int player, const Command& move) {
     cout << "Player " << to_string(player + 1) << " " << 
         moves[move.type] << " " << move.card << "." << endl;
 }
+
+void Print::printRage(int player) {
+    cout << "Player " << to_string(player + 1) << " ragequits. A computer will now take over." << endl;
+}

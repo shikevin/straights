@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include "Command.h"
+#include "Print.h"
 
 /*
 responsible for controlling aspects of the game
@@ -30,8 +31,6 @@ private:
     Command getHumanCommand(bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
-	Deck* deck;
-	Scoreboard* scoreboard;
     bool isGameOver();
     void distributeCards();
     int findStartingPlayer();
@@ -40,6 +39,9 @@ private:
 	void incrementCurrentPlayer();
     Command getComputerCommand();
     bool hasPlayerQuit;
+    Print* information;
+	Deck* deck;
+	Scoreboard* scoreboard;
 };
 
 

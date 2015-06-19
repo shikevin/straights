@@ -22,6 +22,7 @@ Deck::Deck(int seed): seed_(seed) {
 Deck::~Deck() {
     for (int i = 0; i<CARDS_IN_DECK ; i++) {
         delete allCards_[i];
+        allCards_[i] = NULL;
     }
 }
 

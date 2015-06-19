@@ -13,6 +13,7 @@ public:
     void printCardsOnTable(const Deck&);
     void printHumanHand(const Player&);
     void printMove(int player, const Command&);
+    void printRage(int player);
     bool printLegalPlays(const Player&, const Deck&);
 private:
 };

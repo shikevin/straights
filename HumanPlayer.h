@@ -16,7 +16,7 @@ public:
 	void play(Card&);
 	//void discard(Card&);
 	void quit();
-	ComputerPlayer ragequit();
+	ComputerPlayer* ragequit();
 	//std::string getPlayerType(); // "h" v. "c"
 	//int getPlayerID();
 };

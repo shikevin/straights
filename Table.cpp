@@ -14,6 +14,7 @@ const Card Table::startCard = Card(SPADE, SEVEN);
 Table::Table(int seed) : hasPlayerQuit(false) {
 	deck = new Deck(seed);
 	playersInGame.reserve(4);
+    information = new Print();
 	scoreboard = new Scoreboard();
 	currentPlayer = 0;
 }
@@ -21,9 +22,14 @@ Table::Table(int seed) : hasPlayerQuit(false) {
 Table::~Table() {
     for (int i = 0; i < playersInGame.size(); i++) {
         delete playersInGame[i];
+        playersInGame[i] = NULL;
     }
     delete deck;
+    deck = NULL;
     delete scoreboard;
+    scoreboard = NULL;
+    delete information;
+    information = NULL;
 }
 
 int Table::findStartingPlayer() {
@@ -88,9 +94,8 @@ void Table::playGame(string choices) {
         distributeCards();
         int start = findStartingPlayer();
 
-        Print information = Print();
         currentPlayer = start;
-        information.notifyStart(start);
+        information->notifyStart(start);
      
         while(!isRoundOver() && !hasPlayerQuit) {
             // play the game
@@ -99,11 +104,11 @@ void Table::playGame(string choices) {
             if(playaPointa->getPlayerType() == "h") {
 
                 //print cards on table
-                information.printCardsOnTable(*deck);
+                information->printCardsOnTable(*deck);
                 //print player's hand
-                information.printHumanHand(*playaPointa);
+                information->printHumanHand(*playaPointa);
                 //print legal plays
-                bool playableCardExists = information.printLegalPlays(*playaPointa, *deck);
+                bool playableCardExists = information->printLegalPlays(*playaPointa, *deck);
                 validCommand = getHumanCommand(playableCardExists);
                 if (hasPlayerQuit) {
                     break;
@@ -112,9 +117,8 @@ void Table::playGame(string choices) {
                 //generate commands for computers
                 validCommand = getComputerCommand();
             }
-            information.printMove(currentPlayer, validCommand);
             executeMove(validCommand);
-        incrementCurrentPlayer();
+            incrementCurrentPlayer();
         }
     }
 }
@@ -138,15 +142,19 @@ Command Table::getComputerCommand() {
 void Table::executeMove(Command move) {
     Player* playerPointer = playersInGame[currentPlayer];
     if (move.type == PLAY) {
+        information->printMove(currentPlayer, move);
         playerPointer->play(move.card);
         deck->play(move.card);
     } else if(move.type == DISCARD) {
+        information->printMove(currentPlayer, move);
     	playerPointer->discard(move.card);
     	scoreboard->discard(currentPlayer,move.card);
     } else if(move.type == RAGEQUIT) {
-    	*playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
-    } else if (move.type == QUIT) {
-        cout << "haha i quitted" << endl;
+        information->printRage(currentPlayer);
+        Player* temp = playerPointer;
+        playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
+        playersInGame[currentPlayer] = playerPointer;
+        delete temp;
     }
 }
 
@@ -156,10 +164,19 @@ Command Table::getHumanCommand(bool playableCardExists) {
     Command humanInput = Command();
     cout << ">";
     cin >> humanInput;
+    // bool badInput = true;
+    // TO-DO: while(badInput)
+    // if quit, ragequit, discard, play, deck, bool = false
     if (humanInput.type == QUIT) {
         hasPlayerQuit = true;
+        return humanInput;
+    } else if (humanInput.type == RAGEQUIT) {
+        executeMove(humanInput);
+        humanInput = getComputerCommand();
+        return humanInput;
     }
-    if (!hasPlayerQuit && playableCardExists) { // player must play legal card
+    // TO-DO better way to handle quit and ragequit in functions below
+    if (playableCardExists) { // player must play legal card
         while (humanInput.type == DISCARD || 
                 !playaPointa->hasCard(humanInput.card) ||
                 (humanInput.type == PLAY &&
@@ -172,7 +189,7 @@ Command Table::getHumanCommand(bool playableCardExists) {
             cout << ">";
             cin >> humanInput;
         }
-    } else if (!hasPlayerQuit) { // player must discard 
+    } else { // player must discard 
         while ((humanInput.type == PLAY) ||
                 !playaPointa->hasCard(humanInput.card)) {
             cout << "This is not a legal play." << endl;
