@@ -39,6 +39,7 @@ private:
 	int currentPlayer;
 	void incrementCurrentPlayer();
     Command getComputerCommand();
+    bool hasPlayerQuit;
 };
 
 
