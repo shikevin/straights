@@ -86,10 +86,10 @@ void Table::playGame(string choices) {
     		bool playableCardExists = information.printLegalPlays(*playaPointa, deck);
             validCommand = getHumanCommand(playableCardExists);
     	} else {
-
+    		//generate commands for computers
+    	
     	}
         executeMove(validCommand);
-
 	incrementCurrentPlayer();
     }
 }
@@ -99,6 +99,11 @@ void Table::executeMove(Command move) {
     if (move.type == PLAY) {
         playerPointer->play(move.card);
         deck.play(move.card);
+    } else if(move.type == DISCARD) {
+    	playerPointer->discard(move.card);
+    	scoreboard.discard(currentPlayer,move.card);
+    } else if(move.type == RAGEQUIT) {
+    	*playerPointer = playerPointer->ragequit();
     }
 }
 
