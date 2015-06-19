@@ -48,3 +48,7 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
 }
+
+vector<Card*> Player::getCardsInHand() const {
+    return cardsInHand;
+}

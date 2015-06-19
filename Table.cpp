@@ -58,10 +58,13 @@ bool Table::isGameOver() {
     return false;
 }
 
-void Table::startGame(string choices) {
+void Table::playGame(string choices) {
     // start up the game
     initializePlayers(choices);
     deck.newRound();
+    //
+    // TO-DO reset player hands to nothing before distributing
+    //
     distributeCards();
     int start = findStartingPlayer();
 
@@ -71,29 +74,66 @@ void Table::startGame(string choices) {
  
     while (!isGameOver()) {
         // play the game
-    	if(playersInGame[currentPlayer]->getPlayerType() == "h") {
+        Player* playaPointa = playersInGame[currentPlayer];
+        Command validCommand;
+    	if(playaPointa->getPlayerType() == "h") {
 
     		//print cards on table
     		information.printCardsOnTable(deck);
     		//print player's hand
-    		information.printHumanHand(*playersInGame[currentPlayer]);
+    		information.printHumanHand(*playaPointa);
     		//print legal plays
-    		information.printLegalPlays(playersInGame[currentPlayer], deck.getLatestCard());
-
+    		bool playableCardExists = information.printLegalPlays(*playaPointa, deck);
+            validCommand = getHumanCommand(playableCardExists);
     	} else {
 
     	}
- 
-
-
-
-
+        executeMove(validCommand);
 
 	incrementCurrentPlayer();
     }
 }
 
+void Table::executeMove(Command move) {
+    Player* playerPointer = playersInGame[currentPlayer];
+    if (move.type == PLAY) {
+        Card* cardPlayed = deck.getCard(move.card);
+        playerPointer->play(cardPlayed);
+        deck.play(cardPlayed);
+    }
+}
+
+Command Table::getHumanCommand(bool playableCardExists) {
+    Player *playaPointa = playersInGame[currentPlayer];
+    // Read plays by player
+    Command humanInput = Command();
+    cout << ">";
+    cin >> humanInput;
+    if (playableCardExists) { // player must play legal card
+        while (humanInput.type == DISCARD || 
+                !playaPointa->hasCard(humanInput.card) ||
+                (humanInput.type == PLAY &&
+                 !deck.isCardPlayable(humanInput.card))) {
+            if (humanInput.type == DISCARD) {
+                cout << "You have a legal play. You may not discard." << endl;
+            } else {
+                cout << "This is not a legal play." << endl;
+            }
+            cout << ">";
+            cin >> humanInput;
+        }
+    } else { // player must discard 
+        while ((humanInput.type == PLAY) ||
+                !playaPointa->hasCard(humanInput.card)) {
+            cout << "This is not a legal play." << endl;
+            cout << ">";
+            cin >> humanInput;
+        }
+    }
+    return humanInput;
+}
+
 void Table::incrementCurrentPlayer() {
 	currentPlayer++;
-	currentPlayer %= 3;
+	currentPlayer %= 4;
 }

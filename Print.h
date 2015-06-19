@@ -11,7 +11,7 @@ public:
     void notifyStart(int player);
     void printCardsOnTable(const Deck&);
     void printHumanHand(const Player&);
-    void printLegalPlays(Player *, Card*);
+    bool printLegalPlays(const Player&, const Deck&);
 private:
 };
 

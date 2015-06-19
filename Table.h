@@ -6,6 +6,7 @@
 #include "Deck.h"
 #include <vector>
 #include <string>
+#include "Command.h"
 
 /*
 responsible for controlling aspects of the game
@@ -22,9 +23,11 @@ public:
 	Scoreboard scoreboard;
 
 	Table();
-    void startGame(std::string choices);
+    void playGame(std::string choices);
 
 private:
+    void executeMove(Command);
+    Command getHumanCommand(bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
 	Deck deck;
