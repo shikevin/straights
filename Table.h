@@ -8,6 +8,7 @@
 #include <string>
 #include "Command.h"
 #include "Print.h"
+#include "Input.h"
 
 /*
 responsible for controlling aspects of the game
@@ -28,7 +29,6 @@ public:
 private:
     bool isRoundOver();
     void executeMove(Command);
-    Command getHumanCommand(bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
     bool isGameOver();
@@ -38,7 +38,8 @@ private:
 	int currentPlayer;
 	void incrementCurrentPlayer();
     Command getComputerCommand();
-    bool hasPlayerQuit;
+    Command getHumanInput(bool);
+    Input* input;
     Print* information;
 	Deck* deck;
 	Scoreboard* scoreboard;
