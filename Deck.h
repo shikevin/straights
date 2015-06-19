@@ -12,7 +12,6 @@ public:
     void play(Card * card);
     void newRound();
     Card** getDeck() const;
-    Card* getLatestCard() const;
     static const int CARDS_IN_DECK = 52;
     friend std::ostream& operator<< (std::ostream&, const Deck&);
 

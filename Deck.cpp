@@ -80,7 +80,3 @@ ostream& operator << (ostream& sout, const Deck& deck) {
     }
     return sout;
 }
-
-Card * Deck::getLatestCard() const {
-    return latestCard;
-}
