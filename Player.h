@@ -24,6 +24,7 @@ public:
 	int getPlayerID();
 	void addCardToHand(Card*);
 	void nullifyCardsInHand();
+	vector<Card*> Player::getDiscardedCards() const;
 
 protected:
 	void removeCardFromHand(Card&);
