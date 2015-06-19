@@ -3,6 +3,7 @@
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 #include "Print.h"
+#include "Command.h"
 #include <vector>
 #include <string>
 
@@ -14,6 +15,7 @@ Table::Table() {
 	playersInGame.reserve(4);
 	scoreboard = Scoreboard();
 	deck = Deck();
+	currentPlayer = 0;
 }
 
 int Table::findStartingPlayer() {
@@ -66,7 +68,31 @@ void Table::startGame(string choices) {
     Print information = Print();
     information.notifyStart(start);
 
+ 
     while (!isGameOver()) {
         // play the game
+    	if(playersInGame[currentPlayer]->getPlayerType() == "h") {
+
+    		//print cards on table
+    		information.printCardsOnTable(deck);
+
+    		//print player's hand
+    		information.printHumanHand(*playersInGame[currentPlayer]);
+    		
+    	} else {
+
+    	}
+ 
+
+
+
+
+
+	incrementCurrentPlayer();
     }
+}
+
+void Table::incrementCurrentPlayer() {
+	currentPlayer++;
+	currentPlayer %= 3;
 }

@@ -6,6 +6,7 @@
 using namespace std;
 
 // This will zero initiate the scores
+static Card*::latestCard = NULL;
 Deck::Deck() {
     allCards_ = new Card*[CARDS_IN_DECK];
     Card* newCard;
@@ -57,5 +58,6 @@ void Deck::shuffleCards() {
 
 void Deck::play(Card *card) {
     assert(card!=NULL);
-    onTable_[card->getSuit()][card->getRank()] = card; 
+    onTable_[card->getSuit()][card->getRank()] = card;
+    latestCard = card; 
 }

@@ -27,7 +27,6 @@ void Player::discard(Card& discardThisCard) {
 
 string Player::getPlayerType() {
 	return this->type;
-
 }
 
 int Player::getPlayerID() {
