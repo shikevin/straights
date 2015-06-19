@@ -11,7 +11,7 @@ public:
     void notifyStart(int player);
     void printCardsOnTable(const Deck&);
     void printHumanHand(const Player&);
-    void printLegalPlays();
+    void printLegalPlays(Player *, Card*);
 private:
 };
 

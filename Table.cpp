@@ -78,7 +78,7 @@ void Table::startGame(string choices) {
     		//print player's hand
     		information.printHumanHand(*playersInGame[currentPlayer]);
     		//print legal plays
-    		information.printHumanHand(playersInGame[currentPlayer], deck);
+    		information.printLegalPlays(playersInGame[currentPlayer], deck.getLatestCard());
 
     	} else {
 

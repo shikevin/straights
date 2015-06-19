@@ -22,6 +22,6 @@ void Print::printHumanHand(const Player& printPlayerHand) {
 	}
 }
 
-void Print::printLegalPlays(const Player& printLegalHand) {
-	
+void Print::printLegalPlays() {
+
 }
