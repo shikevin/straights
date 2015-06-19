@@ -56,18 +56,14 @@ void Deck::shuffleCards() {
     }
 }
 
-Card* Deck::getCard(const Card& card) {
+void Deck::play(const Card& card) {
+    Card* cardPointer;
     for (int i = 0; i < CARDS_IN_DECK; i++) {
         if (*allCards_[i] == card) {
-            return allCards_[i];
+            cardPointer = allCards_[i];
         }
     }
-    throw "Could not find card";
-}
-
-void Deck::play(Card *card) {
-    assert(card!=NULL);
-    onTable_[card->getSuit()][card->getRank()] = card;
+    onTable_[cardPointer->getSuit()][cardPointer->getRank()] = cardPointer;
 }
 
 ostream& operator << (ostream& sout, const Deck& deck) {

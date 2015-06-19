@@ -9,12 +9,11 @@ class Deck{
 public:
     Deck();
     ~Deck();
-    void play(Card * card);
+    void play(const Card&);
     void newRound();
     Card** getDeck() const;
     friend std::ostream& operator<< (std::ostream&, const Deck&);
     bool isCardPlayable(const Card&) const;
-    Card* getCard(const Card&);
     static const int CARDS_IN_DECK = 52;
 
 private:

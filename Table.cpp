@@ -97,9 +97,8 @@ void Table::playGame(string choices) {
 void Table::executeMove(Command move) {
     Player* playerPointer = playersInGame[currentPlayer];
     if (move.type == PLAY) {
-        Card* cardPlayed = deck.getCard(move.card);
-        playerPointer->play(cardPlayed);
-        deck.play(cardPlayed);
+        playerPointer->play(move.card);
+        deck.play(move.card);
     }
 }
 
