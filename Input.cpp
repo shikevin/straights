@@ -14,9 +14,7 @@ Command Input::getInput(bool playableCardExists, const Deck& deck) {
 
     if (humanInput.type == QUIT) {
         throw PlayerQuitException();
-    } else if (humanInput.type == RAGEQUIT) {
-        return humanInput;
-    } else if (playableCardExists) { // player must play legal card
+    } else if (playableCardExists) {
         if (humanInput.type == DISCARD) {
             throw LegalPlayExistsException();
         } else if (!deck.isCardPlayable(humanInput.card)) {
@@ -27,5 +25,7 @@ Command Input::getInput(bool playableCardExists, const Deck& deck) {
             throw IllegalPlayException();
         }
     }
+    
+    // return if there is valid input
     return humanInput;
 }

@@ -5,16 +5,6 @@
 #include <string>
 #include "Command.h"
 
-/*
-responsible for controlling aspects of the game
-
-main creates the object Table
-
-Table has a list of players
-Table has a scoreboard
-Table has a deck
- */
-
 class Input {
 public:
 	Input();
