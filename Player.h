@@ -22,6 +22,7 @@ public:
 	std::string getPlayerType(); // "h" v. "c"
 	int getPlayerID();
 	void addCardToHand(Card*);
+	void nullifyCardsInHand();
 
 protected:
 	void removeCardFromHand(Card&);

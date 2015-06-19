@@ -48,3 +48,10 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
 }
+
+void Player::nullifyCardsInHand() {
+	for(int i = 0; i < cardsInHand.size(); i++) {
+		delete cardsInHand[i];
+		cardsInHand[i] = NULL;
+	}
+}
