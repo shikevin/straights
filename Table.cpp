@@ -125,7 +125,7 @@ void Table::playGame(string choices) {
         }
     }
     if (isGameOver()) {
-        // print player who wins        
+        information->printWinner(scoreboard->getLowestID());
     }
 }
 

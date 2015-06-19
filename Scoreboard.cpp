@@ -26,3 +26,19 @@ int Scoreboard::getCurrentScore(int player) {
 int Scoreboard::getOldScore(int player) {
         return allScores_[player];
 }
+
+vector <int> Scoreboard::getLowestID() {
+    int lowestScore = 1000;
+    vector<int> winners;
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        if (allScores_[i] + newScores_[i] == lowestScore) {
+            winners.push_back(i);
+        } else if (allScores_[i] + newScores_[i] < lowestScore) {
+            winners.clear();
+            winners.push_back(i);
+            lowestScore = allScores_[i] + newScores_[i];
+        }
+    }
+    return winners;
+
+}

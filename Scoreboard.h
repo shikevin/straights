@@ -4,6 +4,7 @@
 #include <ostream>
 #include "Card.h"
 #include <istream>
+#include <vector>
 
 class Scoreboard{
 public:
@@ -12,6 +13,7 @@ public:
     int getCurrentScore(int player);
     int getOldScore(int player);
     void newRound();
+    std::vector<int> getLowestID();
     
 private:
     static const int MAX_PLAYERS = 4;

@@ -43,12 +43,4 @@ private:
 	Deck* deck;
 	Scoreboard* scoreboard;
 };
-
-
-
-
-
-
-
-
 #endif

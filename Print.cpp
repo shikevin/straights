@@ -57,3 +57,9 @@ void Print::printPlayerResults(int player, int oldScore, int roundScore, vector<
 void Print::printRage(int player) {
     cout << "Player " << to_string(player + 1) << " ragequits. A computer will now take over." << endl;
 }
+
+void Print::printWinner(vector<int> winners) {
+    for (int i = 0; i < winners.size(); i++) {
+        cout << "Player " << to_string(winners[i] + 1) << " wins!" << endl;
+    }
+}
