@@ -17,13 +17,10 @@ Player::Player(string playerType, int id) : type(playerType), playerID(id) {
 	cardsDiscarded.reserve(13);
 }
 
-void Player::discard(Card& discardThisCard) {
+void Player::discard(Card* discardThisCard) {
 	//simply removes card from player's play deck and adds it to the discardedDeck
-	Card * temp = &discardThisCard;
-	removeCardFromHand(*temp);
-	//removed from played cards
-	//add to discardedcards
-	cardsDiscarded.push_back(temp);
+	removeCardFromHand(*discardThisCard);
+	cardsDiscarded.push_back(discardThisCard);
 }
 
 string Player::getPlayerType() {
@@ -43,6 +40,22 @@ void Player::removeCardFromHand(Card& cardToRemove) {
         }
     }
 }
+
+void Player::newRound() {
+
+	//reset player values
+
+	vector<Card*>::iterator handIt;
+	for (handIt = cardsInHand.begin(); handIt != cardsInHand.end(); handIt++) {
+        cardsInHand.erase(handIt);
+    }
+
+    vector<Card*>::iterator discardIt;
+    for (discardIt = cardsInHand.begin(); discardIt != cardsInHand.end(); discardIt++) {
+        cardsDiscarded.erase(discardIt);
+    }
+}
+
 
 void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
@@ -70,3 +83,5 @@ void Player::nullifyCardsInHand() {
 		cardsInHand[i] = NULL;
 	}
 }
+
+
