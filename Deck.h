@@ -10,7 +10,8 @@ class Deck{
 public:
     Deck(int);
     ~Deck();
-    void play(const Card&);
+    void play(Card*);
+    Card* getCard(const Card&);
     void newRound();
     std::vector<Card*> getDeck() const;
 

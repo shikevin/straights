@@ -54,14 +54,16 @@ void Deck::shuffleCards() {
     }
 }
 
-void Deck::play(const Card& card) {
-    Card* cardPointer;
+Card* Deck::getCard(const Card& card) {
     for (int i = 0; i < CARDS_IN_DECK; i++) {
         if (*allCards_[i] == card) {
-            cardPointer = allCards_[i];
+            return allCards_[i];
         }
     }
-    onTable_[cardPointer->getSuit()][cardPointer->getRank()] = cardPointer;
+    return NULL;
+}
+void Deck::play(Card* card) {
+    onTable_[card->getSuit()][card->getRank()] = card;
 }
 
 ostream& operator << (ostream& sout, const Deck& deck) {

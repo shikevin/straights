@@ -82,4 +82,3 @@ bool Player::hasCard(const Card& card) {
     }
     return false;
 }
-

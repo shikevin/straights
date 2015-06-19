@@ -45,6 +45,15 @@ void Print::printMove(int player, const Command& move) {
         moves[move.type] << " " << move.card << "." << endl;
 }
 
+void Print::printPlayerResults(int player, int oldScore, int roundScore, vector<Card*> discard) {
+    cout << "Player " << to_string(player + 1) << "'s discards: ";
+    for (int i = 0; i < discard.size(); i++) {
+        cout << *discard[i] << " ";
+    }
+    cout << endl;
+    cout << "Player " << to_string(player + 1) << "'s score: " <<  oldScore << " + " << roundScore << " = " << oldScore+roundScore << endl;
+}
+
 void Print::printRage(int player) {
     cout << "Player " << to_string(player + 1) << " ragequits. A computer will now take over." << endl;
 }
