@@ -2,6 +2,7 @@
 #include "Card.h"
 #include <string>
 #include <assert.h>
+#include <iostream>
 #include <random>
 using namespace std;
 
@@ -58,4 +59,18 @@ void Deck::shuffleCards() {
 void Deck::play(Card *card) {
     assert(card!=NULL);
     onTable_[card->getSuit()][card->getRank()] = card; 
+}
+
+ostream& operator << (ostream& sout, const Deck& deck) {
+    string suits[SUIT_COUNT] = { "Clubs", "Diamonds", "Hearts", "Spades" };
+    for (int i = 0; i < SUIT_COUNT; i++) {
+        sout << suits[i] << ": ";
+        for (int j = 0; j < RANK_COUNT; j++) {
+            if (deck.onTable_[i][j] != NULL) {
+                sout << &deck.onTable_[i][j];
+            }
+        }
+        sout << endl;
+    }
+    return sout;
 }
