@@ -14,6 +14,7 @@ public:
     void printHumanHand(const Player&);
     void printMove(int player, const Command&);
     void printRage(int player);
+    void printPlayerResults(int, int, int, std::vector<Card*>);
     bool printLegalPlays(const Player&, const Deck&);
 private:
 };

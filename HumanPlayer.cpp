@@ -29,13 +29,8 @@ ComputerPlayer* HumanPlayer::ragequit() {
 		replacementPlayer->addCardToHand(this->cardsInHand[i]);
 	}
 	for(int j = 0; j < this->cardsDiscarded.size(); j++) {
-		replacementPlayer->discard(*this->cardsInHand[j]);
+		replacementPlayer->discard(this->cardsInHand[j]);
 	} 
 	return replacementPlayer;
 
 }
-
-
-
-
-

@@ -17,14 +17,14 @@ public:
 	virtual ~Player() {} //default is good enough?
 		
 	std::vector<Card*> getCardsInHand() const;
+    std::vector<Card*> getDiscardedCards() const;
 	virtual void play(Card&) = 0;		
-	void discard(Card&);
+	void discard(Card*);
     bool hasCard(const Card&);
 	std::string getPlayerType(); // "h" v. "c"
 	int getPlayerID();
 	void addCardToHand(Card*);
 	void nullifyCardsInHand();
-	vector<Card*> Player::getDiscardedCards() const;
 
 protected:
 	void removeCardFromHand(Card&);

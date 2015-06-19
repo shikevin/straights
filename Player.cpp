@@ -17,13 +17,12 @@ Player::Player(string playerType, int id) : type(playerType), playerID(id) {
 	cardsDiscarded.reserve(13);
 }
 
-void Player::discard(Card& discardThisCard) {
+void Player::discard(Card* discardThisCard) {
 	//simply removes card from player's play deck and adds it to the discardedDeck
-	Card * temp = &discardThisCard;
-	removeCardFromHand(*temp);
+	removeCardFromHand(*discardThisCard);
 	//removed from played cards
 	//add to discardedcards
-	cardsDiscarded.push_back(temp);
+	cardsDiscarded.push_back(discardThisCard);
 }
 
 string Player::getPlayerType() {

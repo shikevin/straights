@@ -118,7 +118,12 @@ void Table::playGame(string choices) {
             incrementCurrentPlayer();
         }
 
-        information->printRoundResults(scoreboard);
+        for (int i = 0; i < playersInGame.size(); i++) {
+            information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
+        }
+    }
+    if (isGameOver()) {
+        
     }
 }
 
@@ -143,11 +148,11 @@ void Table::executeMove(Command move) {
     if (move.type == PLAY) {
         information->printMove(currentPlayer, move);
         playerPointer->play(move.card);
-        deck->play(move.card);
+        deck->play(deck->getCard(move.card));
     } else if(move.type == DISCARD) {
         information->printMove(currentPlayer, move);
-    	playerPointer->discard(move.card);
-    	scoreboard->discard(currentPlayer,move.card);
+    	playerPointer->discard(deck->getCard(move.card));
+    	scoreboard->discard(currentPlayer, move.card);
     } else if(move.type == RAGEQUIT) {
         information->printRage(currentPlayer);
         Player* temp = playerPointer;
