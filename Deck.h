@@ -2,6 +2,7 @@
 #define _DECK_
 
 #include "Card.h"
+#include <iostream>
 #include <map>
 
 class Deck{
@@ -12,11 +13,13 @@ public:
     void newRound();
     Card** getDeck() const;
     static const int CARDS_IN_DECK = 52;
+    friend std::ostream& operator<< (std::ostream&, const Deck&);
+
 private:
     void shuffleCards();
     Card** allCards_; // should be a shuffle-able array
-    Card* onTable_ [SPADE + 1][KING + 1]; // should be already sorted
     static Card* latestCardPlayed;
+    Card* onTable_ [SUIT_COUNT][RANK_COUNT]; // should be already sorted
 };
 
 #endif
