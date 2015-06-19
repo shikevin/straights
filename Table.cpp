@@ -87,6 +87,7 @@ void Table::playGame(string choices) {
     initializePlayers(choices);
 
     while (!isGameOver() && !hasPlayerQuit) {
+        scoreboard->newRound();
         deck->newRound();
         distributeCards();
         int start = findStartingPlayer();
@@ -120,10 +121,11 @@ void Table::playGame(string choices) {
 
         for (int i = 0; i < playersInGame.size(); i++) {
             information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
+            playersInGame[i]->newRound();
         }
     }
     if (isGameOver()) {
-        
+        // print player who wins        
     }
 }
 

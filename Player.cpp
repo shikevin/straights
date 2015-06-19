@@ -20,8 +20,6 @@ Player::Player(string playerType, int id) : type(playerType), playerID(id) {
 void Player::discard(Card* discardThisCard) {
 	//simply removes card from player's play deck and adds it to the discardedDeck
 	removeCardFromHand(*discardThisCard);
-	//removed from played cards
-	//add to discardedcards
 	cardsDiscarded.push_back(discardThisCard);
 }
 
@@ -43,6 +41,22 @@ void Player::removeCardFromHand(Card& cardToRemove) {
     }
 }
 
+void Player::newRound() {
+
+	//reset player values
+
+	vector<Card*>::iterator handIt;
+	for (handIt = cardsInHand.begin(); handIt != cardsInHand.end(); handIt++) {
+        cardsInHand.erase(handIt);
+    }
+
+    vector<Card*>::iterator discardIt;
+    for (discardIt = cardsInHand.begin(); discardIt != cardsInHand.end(); discardIt++) {
+        cardsDiscarded.erase(discardIt);
+    }
+}
+
+
 void Player::addCardToHand(Card *newCard) {
 	cardsInHand.push_back(newCard);
 }
@@ -62,10 +76,4 @@ bool Player::hasCard(const Card& card) {
         }
     }
     return false;
-}
-
-void Player::nullifyCardsInHand() {
-	for(int i = 0; i < cardsInHand.size(); i++) {
-		cardsInHand[i] = NULL;
-	}
 }
