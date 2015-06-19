@@ -75,10 +75,11 @@ void Table::startGame(string choices) {
 
     		//print cards on table
     		information.printCardsOnTable(deck);
-
     		//print player's hand
     		information.printHumanHand(*playersInGame[currentPlayer]);
-    		
+    		//print legal plays
+    		information.printHumanHand(playersInGame[currentPlayer], deck);
+
     	} else {
 
     	}

@@ -7,7 +7,8 @@
 using namespace std;
 
 // This will zero initiate the scores
-static Card*::latestCard = NULL;
+Card* Deck::latestCard = NULL;
+
 Deck::Deck() {
     allCards_ = new Card*[CARDS_IN_DECK];
     Card* newCard;
@@ -78,4 +79,8 @@ ostream& operator << (ostream& sout, const Deck& deck) {
         sout << endl;
     }
     return sout;
+}
+
+Card * Deck::getLatestCard() const {
+    return latestCard;
 }
