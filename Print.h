@@ -10,14 +10,15 @@
 class Print {
 public:
 	Print();
-    void notifyStart(int player);
-    void printCardsOnTable(const Deck&);
-    void printHumanHand(const Player&);
-    void printMove(int player, const Command&);
-    void printRage(int player);
-    void printPlayerResults(int, int, int, std::vector<Card*>);
-    bool printLegalPlays(const Player&, const Deck&);
-    void printWinner(std::vector<int>);
+    void notifyStart(int player)const;
+    void printCardsOnTable(const Deck&)const;
+    void printHumanHand(const Player&)const;
+    void printMove(int player, const Command&)const;
+    void printRage(int player)const;
+    void printPlayerResults(int, int, int, std::vector<Card*>)const;
+    bool printLegalPlays(const Player&, const Deck&)const;
+    void printWinner(std::vector<int>)const;
+    void printDeck(std::vector<Card*>)const;
 private:
 };
 
