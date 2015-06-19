@@ -23,7 +23,6 @@ int main (int argc, char* argv[]) {
         assert (c=='h' || c =='c');
         choices += c;
     }
-    cout << choices << endl;
 
     //starts the new game
     //initializes a table that is the braniac
@@ -36,7 +35,11 @@ int main (int argc, char* argv[]) {
     //ragequit()
     //deck()
 
-    Table braniac = Table(atoi(argv[1]));
+    int seed = 0;
+    if (argc > 1) {
+        seed = atoi(argv[1]);  
+    }
+    Table braniac = Table(seed);
     braniac.playGame(choices);
     return 0;
 }

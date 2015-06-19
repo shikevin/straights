@@ -84,13 +84,10 @@ bool Table::isRoundOver() {
 
 void Table::playGame(string choices) {
     // start up the game
-
     initializePlayers(choices);
+
     while (!isGameOver() && !hasPlayerQuit) {
         deck->newRound();
-        //
-        // TO-DO reset player hands to nothing before distributing
-        //
         distributeCards();
         int start = findStartingPlayer();
 
@@ -120,6 +117,8 @@ void Table::playGame(string choices) {
             executeMove(validCommand);
             incrementCurrentPlayer();
         }
+
+        information->printRoundResults(scoreboard);
     }
 }
 
@@ -160,41 +159,35 @@ void Table::executeMove(Command move) {
 
 Command Table::getHumanCommand(bool playableCardExists) {
     Player *playaPointa = playersInGame[currentPlayer];
-    // Read plays by player
+
+    bool badInput = true;
     Command humanInput = Command();
-    cout << ">";
-    cin >> humanInput;
-    // bool badInput = true;
-    // TO-DO: while(badInput)
-    // if quit, ragequit, discard, play, deck, bool = false
-    if (humanInput.type == QUIT) {
-        hasPlayerQuit = true;
-        return humanInput;
-    } else if (humanInput.type == RAGEQUIT) {
-        executeMove(humanInput);
-        humanInput = getComputerCommand();
-        return humanInput;
-    }
-    // TO-DO better way to handle quit and ragequit in functions below
-    if (playableCardExists) { // player must play legal card
-        while (humanInput.type == DISCARD || 
-                !playaPointa->hasCard(humanInput.card) ||
-                (humanInput.type == PLAY &&
-                 !deck->isCardPlayable(humanInput.card))) {
+    while (badInput) {
+        // Read plays by player
+        cout << ">";
+        cin >> humanInput;
+
+        if (humanInput.type == QUIT) {
+            hasPlayerQuit = true;
+            badInput = false;
+        } else if (humanInput.type == RAGEQUIT) {
+            executeMove(humanInput);
+            humanInput = getComputerCommand();
+            badInput = false;
+        } else if (playableCardExists) { // player must play legal card
             if (humanInput.type == DISCARD) {
                 cout << "You have a legal play. You may not discard." << endl;
-            } else {
+            } else if (!deck->isCardPlayable(humanInput.card)) {
                 cout << "This is not a legal play." << endl;
+            } else {
+                badInput = false;
             }
-            cout << ">";
-            cin >> humanInput;
-        }
-    } else { // player must discard 
-        while ((humanInput.type == PLAY) ||
-                !playaPointa->hasCard(humanInput.card)) {
-            cout << "This is not a legal play." << endl;
-            cout << ">";
-            cin >> humanInput;
+        } else if (!playableCardExists) {
+            if (humanInput.type == PLAY) {
+                cout << "This is not a legal play." << endl;
+            } else {
+                badInput = false;
+            }
         }
     }
     return humanInput;
