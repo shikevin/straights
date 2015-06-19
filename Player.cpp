@@ -52,3 +52,9 @@ void Player::addCardToHand(Card *newCard) {
 vector<Card*> Player::getCardsInHand() const {
     return cardsInHand;
 }
+
+void Player::nullifyCardsInHand() {
+	for(int i = 0; i < cardsInHand.size(); i++) {
+		cardsInHand[i] = NULL;
+	}
+}
