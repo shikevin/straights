@@ -43,19 +43,6 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 
 void Player::newRound() {
 
-	//reset player values
-	/*
-	vector<Card*>::iterator handIt;
-	for (handIt = cardsInHand.begin(); handIt != cardsInHand.end(); handIt++) {
-        cardsInHand.erase(handIt);
-    }
-
-    vector<Card*>::iterator discardIt;
-    for (discardIt = cardsInHand.begin(); discardIt != cardsInHand.end(); discardIt++) {
-        cardsDiscarded.erase(discardIt);
-    }
-    */
-
     cardsInHand.clear();
     cardsDiscarded.clear();
 }
