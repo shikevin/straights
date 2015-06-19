@@ -20,17 +20,18 @@ Table has a deck
 
 class Table {
 public:
-	Scoreboard scoreboard;
 	Table(int);
     ~Table();
     void playGame(std::string choices);
 
 private:
+    bool isRoundOver();
     void executeMove(Command);
     Command getHumanCommand(bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
 	Deck* deck;
+	Scoreboard* scoreboard;
     bool isGameOver();
     void distributeCards();
     int findStartingPlayer();

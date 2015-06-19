@@ -14,7 +14,7 @@ const Card Table::startCard = Card(SPADE, SEVEN);
 Table::Table(int seed) {
 	deck = new Deck(seed);
 	playersInGame.reserve(4);
-	scoreboard = Scoreboard();
+	scoreboard = new Scoreboard();
 	currentPlayer = 0;
 }
 
@@ -59,47 +59,58 @@ void Table::initializePlayers(string choices) {
 
 bool Table::isGameOver() {
     for (int i=0; i<playersInGame.size(); i++) {
-        if (scoreboard.getCurrentScore(i) + scoreboard.getOldScore(i) >= 80) {
+        if (scoreboard->getCurrentScore(i) + scoreboard->getOldScore(i) >= 80) {
             return true;
         }
     }
     return false;
 }
 
+bool Table::isRoundOver() {
+    for (int i = 0; i < playersInGame.size(); i++) {
+        if (playersInGame[i]->getCardsInHand().size() > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void Table::playGame(string choices) {
     // start up the game
 
     initializePlayers(choices);
-    deck->newRound();
-    //
-    // TO-DO reset player hands to nothing before distributing
-    //
-    distributeCards();
-    int start = findStartingPlayer();
-
-    Print information = Print();
-    currentPlayer = start;
-    information.notifyStart(start);
- 
     while (!isGameOver()) {
-        // play the game
-        Player* playaPointa = playersInGame[currentPlayer];
-        Command validCommand;
-    	if(playaPointa->getPlayerType() == "h") {
+        deck->newRound();
+        //
+        // TO-DO reset player hands to nothing before distributing
+        //
+        distributeCards();
+        int start = findStartingPlayer();
 
-    		//print cards on table
-    		information.printCardsOnTable(*deck);
-    		//print player's hand
-    		information.printHumanHand(*playaPointa);
-    		//print legal plays
-    		bool playableCardExists = information.printLegalPlays(*playaPointa, *deck);
-            validCommand = getHumanCommand(playableCardExists);
-    	} else {
-    		//generate commands for computers
-    	
-    	}
-        executeMove(validCommand);
-	incrementCurrentPlayer();
+        Print information = Print();
+        currentPlayer = start;
+        information.notifyStart(start);
+     
+        while(!isRoundOver()) {
+            // play the game
+            Player* playaPointa = playersInGame[currentPlayer];
+            Command validCommand;
+            if(playaPointa->getPlayerType() == "h") {
+
+                //print cards on table
+                information.printCardsOnTable(*deck);
+                //print player's hand
+                information.printHumanHand(*playaPointa);
+                //print legal plays
+                bool playableCardExists = information.printLegalPlays(*playaPointa, *deck);
+                validCommand = getHumanCommand(playableCardExists);
+            } else {
+                //generate commands for computers
+            
+            }
+            executeMove(validCommand);
+        incrementCurrentPlayer();
+        }
     }
 }
 
@@ -110,7 +121,7 @@ void Table::executeMove(Command move) {
         deck->play(move.card);
     } else if(move.type == DISCARD) {
     	playerPointer->discard(move.card);
-    	scoreboard.discard(currentPlayer,move.card);
+    	scoreboard->discard(currentPlayer,move.card);
     } else if(move.type == RAGEQUIT) {
     	*playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
     }

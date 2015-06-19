@@ -1,5 +1,6 @@
 #include "Player.h"
 #include  <vector>
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -34,15 +35,13 @@ int Player::getPlayerID() {
 }
 
 void Player::removeCardFromHand(Card& cardToRemove) {
-
-	Card * temp = &cardToRemove;
-	for(int i = 0; i < cardsInHand.size(); i++) {
-		if(temp == cardsInHand[i]) {
-			//remove this pointer
-			cardsInHand[i] = NULL;
-			//make pointer point to nothing
-		}
-	}
+    vector<Card*>::iterator it;
+    for (it = cardsInHand.begin(); it != cardsInHand.end(); it++) {
+        if (cardToRemove == *(*it)) {
+            cardsInHand.erase(it);
+            return;
+        }
+    }
 }
 
 void Player::addCardToHand(Card *newCard) {
