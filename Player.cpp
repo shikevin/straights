@@ -44,7 +44,7 @@ void Player::removeCardFromHand(Card& cardToRemove) {
 void Player::newRound() {
 
 	//reset player values
-
+	/*
 	vector<Card*>::iterator handIt;
 	for (handIt = cardsInHand.begin(); handIt != cardsInHand.end(); handIt++) {
         cardsInHand.erase(handIt);
@@ -54,7 +54,12 @@ void Player::newRound() {
     for (discardIt = cardsInHand.begin(); discardIt != cardsInHand.end(); discardIt++) {
         cardsDiscarded.erase(discardIt);
     }
+    */
+
+    cardsInHand.clear();
+    cardsDiscarded.clear();
 }
+
 
 
 void Player::addCardToHand(Card *newCard) {
@@ -77,11 +82,4 @@ bool Player::hasCard(const Card& card) {
     }
     return false;
 }
-
-void Player::nullifyCardsInHand() {
-	for(int i = 0; i < cardsInHand.size(); i++) {
-		cardsInHand[i] = NULL;
-	}
-}
-
 

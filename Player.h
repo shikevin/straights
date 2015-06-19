@@ -23,7 +23,6 @@ public:
 	std::string getPlayerType(); // "h" v. "c"
 	int getPlayerID();
 	void addCardToHand(Card*);
-	void nullifyCardsInHand();
 	vector<Card*> Player::getDiscardedCards() const;
 
 protected:
