@@ -26,8 +26,11 @@ ComputerPlayer* HumanPlayer::ragequit() {
 	ComputerPlayer* replacementPlayer = new ComputerPlayer("c", this->getPlayerID());
 	//initilize computerplayer's arrays
 	for(int i =0; i < this->cardsInHand.size(); i++) {
-		replacementPlayer->addCardToHand((this->cardsInHand[i]));
+		replacementPlayer->addCardToHand(this->cardsInHand[i]);
 	}
+	for(int j = 0; j < this->cardsDiscarded.size(); j++) {
+		replacementPlayer->discard(*this->cardsInHand[j]);
+	} 
 	return replacementPlayer;
 
 }

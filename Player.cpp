@@ -52,6 +52,10 @@ vector<Card*> Player::getCardsInHand() const {
     return cardsInHand;
 }
 
+vector<Card*> Player::getDiscardedCards() const {
+	return cardsDiscarded;
+}
+
 bool Player::hasCard(const Card& card) {
     for (int i =0 ; i < cardsInHand.size(); i++) {
         if (card == *cardsInHand[i]) {
