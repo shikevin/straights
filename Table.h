@@ -28,7 +28,7 @@ public:
 
 private:
     bool isRoundOver();
-    void executeMove(Command);
+    void executeMove(Command, bool);
     static const Card startCard;
 	std::vector<Player*> playersInGame;
     bool isGameOver();
@@ -37,7 +37,7 @@ private:
 	void initializePlayers(std::string); // string passed in is "choices" from main
 	int currentPlayer;
 	void incrementCurrentPlayer();
-    Command getComputerCommand();
+    Command getComputerCommand(bool);
     Command getHumanInput(bool, bool);
     Input* input;
     Print* information;

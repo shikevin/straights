@@ -114,9 +114,9 @@ void Table::playGame(string choices) {
                     validCommand = getHumanInput(playableCardExists, isFirstPlayer);
                 } else {
                     //generate commands for computers
-                    validCommand = getComputerCommand();
+                    validCommand = getComputerCommand(isFirstPlayer);
                 }
-                executeMove(validCommand);
+                executeMove(validCommand, isFirstPlayer);
                 incrementCurrentPlayer();
                 isFirstPlayer = false;
             }
@@ -152,9 +152,14 @@ Command Table::getHumanInput(bool playableCardExists, bool isFirstPlayer) {
     return validCommand;
 }
 
-Command Table::getComputerCommand() {
+Command Table::getComputerCommand(bool isFirstPlayer) {
     vector<Card*> playerCards = playersInGame[currentPlayer]->getCardsInHand();
     Command computerCommand = Command();
+    if (isFirstPlayer) {
+        computerCommand.type = PLAY;
+        computerCommand.card = startCard;
+        return computerCommand;
+    }
     for (int i = 0; i < playerCards.size(); i++) {
         if (deck->isCardPlayable(*playerCards[i])) {
             computerCommand.type = PLAY;
@@ -168,7 +173,7 @@ Command Table::getComputerCommand() {
     return computerCommand;
 }
 
-void Table::executeMove(Command move) {
+void Table::executeMove(Command move, bool isFirstPlayer) {
     Player* playerPointer = playersInGame[currentPlayer];
     if (move.type == PLAY) {
         information->printMove(currentPlayer, move);
@@ -184,7 +189,7 @@ void Table::executeMove(Command move) {
         playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
         playersInGame[currentPlayer] = playerPointer;
         delete temp;
-        executeMove(getComputerCommand());
+        executeMove(getComputerCommand(isFirstPlayer), isFirstPlayer);
     }
 }
 
