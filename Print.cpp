@@ -69,9 +69,9 @@ void Print::printWinner(vector<int> winners) const{
 }
 
 void Print::printDeck(vector<Card*> shuffledDeck) const{
-	for(int i = 1; i <= 52; i++) {
-		cout << shuffledDeck.at(i) << " ";
-		if (i%13 == 0) {
+	for(int i = 0; i < 52; i++) {
+		cout << *shuffledDeck.at(i) << " ";
+		if ((i+1)%13 == 0) {
 			cout << endl;
 		}
 	}

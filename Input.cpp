@@ -12,7 +12,7 @@ Command Input::getInput(bool playableCardExists, const Deck& deck, bool isFirstP
     cout << ">";
     cin >> humanInput;
 
-    if(humanInput.type != RAGEQUIT) {
+    if(humanInput.type != RAGEQUIT && humanInput.type != DECK) {
          if (humanInput.type == QUIT) {
         throw PlayerQuitException();
     } else if (playableCardExists) {

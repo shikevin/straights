@@ -183,6 +183,8 @@ void Table::executeMove(Command move) {
         playersInGame[currentPlayer] = playerPointer;
         delete temp;
         executeMove(getComputerCommand());
+    } else if(move.type == DECK) {
+    	information->printDeck(deck->getDeck());
     }
 }
 
