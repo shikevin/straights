@@ -27,6 +27,10 @@ public:
         public:
             IllegalPlayException() : Exception() {}
     };
+    class PrintDeckException : public Exception {
+        public:
+            PrintDeckException() : Exception() {}
+    };
 
 private:
 };
