@@ -5,7 +5,7 @@ using namespace std;
 Input::Input() {
 }
 
-Command Input::getInput(bool playableCardExists, const Deck& deck) {
+Command Input::getInput(bool playableCardExists, const Deck& deck, bool isFirstPlayer, const Card& card) {
     bool badInput = true;
     Command humanInput = Command();
     // Read plays by player
@@ -24,6 +24,11 @@ Command Input::getInput(bool playableCardExists, const Deck& deck) {
         if (humanInput.type == PLAY) {
             throw IllegalPlayException();
         }
+    }
+    
+    if (isFirstPlayer && humanInput.type == PLAY && 
+            !(humanInput.card == card)) {
+        throw IllegalPlayException();
     }
     
     // return if there is valid input

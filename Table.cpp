@@ -90,6 +90,7 @@ void Table::playGame(string choices) {
 
     try {
         while (!isGameOver()) {
+            bool isFirstPlayer = true;
             scoreboard->newRound();
             deck->newRound();
             distributeCards();
@@ -109,14 +110,15 @@ void Table::playGame(string choices) {
                     //print player's hand
                     information->printHumanHand(*playaPointa);
                     //print legal plays
-                    bool playableCardExists = information->printLegalPlays(*playaPointa, *deck);
-                    validCommand = getHumanInput(playableCardExists);
+                    bool playableCardExists = information->printLegalPlays(*playaPointa, *deck, isFirstPlayer);
+                    validCommand = getHumanInput(playableCardExists, isFirstPlayer);
                 } else {
                     //generate commands for computers
                     validCommand = getComputerCommand();
                 }
                 executeMove(validCommand);
                 incrementCurrentPlayer();
+                isFirstPlayer = false;
             }
 
             for (int i = 0; i < playersInGame.size(); i++) {
@@ -132,12 +134,12 @@ void Table::playGame(string choices) {
     }
 }
 
-Command Table::getHumanInput(bool playableCardExists) {
+Command Table::getHumanInput(bool playableCardExists, bool isFirstPlayer) {
     Command validCommand;
     bool success = false;
     while(!success) {
         try {
-            validCommand = input->getInput(playableCardExists, *deck);
+            validCommand = input->getInput(playableCardExists, *deck, isFirstPlayer, startCard);
             success = true;
         } catch (Input::LegalPlayExistsException &e) {
             cout << "You have a legal play. You may not discard." << endl;

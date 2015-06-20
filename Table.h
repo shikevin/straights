@@ -38,7 +38,7 @@ private:
 	int currentPlayer;
 	void incrementCurrentPlayer();
     Command getComputerCommand();
-    Command getHumanInput(bool);
+    Command getHumanInput(bool, bool);
     Input* input;
     Print* information;
 	Deck* deck;

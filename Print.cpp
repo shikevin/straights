@@ -25,9 +25,13 @@ void Print::printHumanHand(const Player& printPlayerHand) const{
     cout << endl;
 }
 
-bool Print::printLegalPlays(const Player& player, const Deck& deck) const{
-    bool legalCardExists = false;
+bool Print::printLegalPlays(const Player& player, const Deck& deck, bool isFirstPlayer) const {
     cout << "Legal plays: ";
+    if (isFirstPlayer) {
+        cout << "7S" << endl;
+        return true;
+    }
+    bool legalCardExists = false;
     vector<Card*> playerCards = player.getCardsInHand();
     for (int i = 0; i < playerCards.size(); i++) {
         if (deck.isCardPlayable(*playerCards[i])) {

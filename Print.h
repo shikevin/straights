@@ -16,7 +16,7 @@ public:
     void printMove(int player, const Command&)const;
     void printRage(int player)const;
     void printPlayerResults(int, int, int, std::vector<Card*>)const;
-    bool printLegalPlays(const Player&, const Deck&)const;
+    bool printLegalPlays(const Player&, const Deck&, bool)const;
     void printWinner(std::vector<int>)const;
     void printDeck(std::vector<Card*>)const;
 private:

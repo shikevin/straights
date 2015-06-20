@@ -8,7 +8,7 @@
 class Input {
 public:
 	Input();
-    Command getInput(bool, const Deck&);
+    Command getInput(bool, const Deck&, bool, const Card&);
 
     class Exception {
         public:
