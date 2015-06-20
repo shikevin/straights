@@ -1,6 +1,7 @@
 #include "HumanPlayer.h"
 #include  <vector>
 #include <string>
+#include <iostream>
 using namespace std;
 
 
@@ -29,7 +30,7 @@ ComputerPlayer* HumanPlayer::ragequit() {
 		replacementPlayer->addCardToHand(this->cardsInHand[i]);
 	}
 	for(int j = 0; j < this->cardsDiscarded.size(); j++) {
-		replacementPlayer->discard(this->cardsInHand[j]);
+		replacementPlayer->discard(this->cardsDiscarded[j]);
 	} 
 	return replacementPlayer;
 
