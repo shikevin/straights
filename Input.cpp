@@ -12,7 +12,8 @@ Command Input::getInput(bool playableCardExists, const Deck& deck, bool isFirstP
     cout << ">";
     cin >> humanInput;
 
-    if (humanInput.type == QUIT) {
+    if(humanInput.type != RAGEQUIT) {
+         if (humanInput.type == QUIT) {
         throw PlayerQuitException();
     } else if (playableCardExists) {
         if (humanInput.type == DISCARD) {
@@ -29,6 +30,7 @@ Command Input::getInput(bool playableCardExists, const Deck& deck, bool isFirstP
     if (isFirstPlayer && humanInput.type == PLAY && 
             !(humanInput.card == card)) {
         throw IllegalPlayException();
+    }
     }
     
     // return if there is valid input
