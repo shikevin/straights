@@ -11,6 +11,7 @@
  */
 #ifndef __DECK_GUI_H
 #define __DECK_GUI_H
+
 #include <gdkmm/pixbuf.h>
 #include <vector>
 using std::vector;

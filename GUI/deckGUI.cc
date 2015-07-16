@@ -29,7 +29,7 @@ const char * image_names[] = {
 	// Set up ACE of {DIAMOND,CLUB,HEART,SPADE}
 	"cards_png/5_0.png", "cards_png/5_1.png", "cards_png/5_2.png", "cards_png/5_3.png",
 	// Set up the back of a card for a place holder/null card
-	"cards_png/back_1.png"
+	"cards_png/nothing.png"
 }; 
 
 // Loads the image from the specified file name into a pixel buffer.
