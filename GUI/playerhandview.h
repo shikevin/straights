@@ -13,6 +13,7 @@ public:
 	PlayerHandView();
 	virtual ~PlayerHandView();
     Gtk::HBox* getViewBox();
+    void onButtonClicked(int);
 	
 private:
 	DeckGUI                         deck;             // Knows all of the card pixel buffers.
