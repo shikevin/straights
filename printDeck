@@ -1,0 +1,7 @@
+Table.cpp:    vector<Card*> shuffled = deck->getDeck();  
+Table.cpp:            deck->newRound();
+Table.cpp:        	deck->printDeck();
+Table.cpp:        if (deck->isCardPlayable(*playerCards[i])) {
+Table.cpp:        deck->play(deck->getCard(move.card));
+Table.cpp:    	playerPointer->discard(deck->getCard(move.card));
+Table.cpp:    	information->printDeck(deck->getDeck());
