@@ -23,11 +23,16 @@ MainWindow::MainWindow() {
    
 	// Add the frame to the window. Windows can only hold one widget, same for frames.
 	add( frame );
-	
-	// Add the horizontal box for laying out the images to the frame.
-	frame.add(*handView.getViewBox());
 
-    show_all();
+	mainBox.pack_start(*scoreView.getScoreBox());
+	mainBox.pack_start(*handView.getViewBox());
+    
+	// Add the horizontal box for laying out the images to the frame.
+	frame.add(mainBox);
+
+	
+	// The final step is to display this newly created widget.
+	show_all();
 }
 
 MainWindow::~MainWindow() {
