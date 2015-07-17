@@ -13,7 +13,6 @@ MainWindow::MainWindow() {
 	set_border_width( 20 );
 		
 	// Set the look of the frame.
-	frame.set_label( "Your Hand" );
 	frame.set_label_align( Gtk::ALIGN_LEFT, Gtk::ALIGN_TOP );
 	frame.set_shadow_type( Gtk::SHADOW_ETCHED_OUT );
     
