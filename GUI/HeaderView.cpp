@@ -1,5 +1,8 @@
 #include "HeaderView.h"
+#include <iostream>
 #include <string>
+
+using namespace std;
 
 HeaderView::HeaderView(): Component() {
 
@@ -10,6 +13,9 @@ HeaderView::HeaderView(): Component() {
 
 	startButton.set_label("Start with seed:");
 	endButton.set_label("Quit");
+
+    startButton.signal_clicked().connect(
+                sigc::mem_fun(*this, &HeaderView::onStartClicked));
 
 
 	headerBox.add(startButton);
@@ -27,4 +33,8 @@ void HeaderView::updateView() {
 
 Gtk::HBox* HeaderView::getHeaderView() {
 	return &headerBox;
+}
+
+void HeaderView::onStartClicked() {
+    cout << "start clicked" << endl;
 }

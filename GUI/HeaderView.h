@@ -21,6 +21,7 @@ public:
     void updateView();
 	
 private:
+    void onStartClicked();
 	int seed;             // store inputed seed		
 	
 	// Member widgets:
