@@ -1,5 +1,6 @@
 #include "playerhandview.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -9,40 +10,53 @@ using namespace std;
 // with an image in it.
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
-PlayerHandView::PlayerHandView() : hbox( true, 10 ) {
+PlayerHandView::PlayerHandView() : table( 1, 13, true ) {
 		
 	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deck.getNullCardImage();
 	const Glib::RefPtr<Gdk::Pixbuf> cardPixbuf     = deck.getCardImage( TEN, SPADE );
 	
     
+	// for (int i = 0; i < 10; i++) {
+	// 	std::ostringstream ss;
+	// 	ss << "I am " << i;
+	// 	buttons[i].set_label(ss.str());
+	// }
 	// Initialize 12 empty cards and place them in the box.
 	for (int i = 0; i < 12; i++ ) {
 		card[i] = new Gtk::Image( nullCardPixbuf );
-		hbox.add( *card[i] );
+        buttons[i].set_image( *card[i] );
 	} // for
 	
 	// Initialize the 5th card and place the image into the button.
 	card[12] = new Gtk::Image( cardPixbuf );	
-	button.set_image( *card[12] );	
-    button.signal_clicked().connect(
+	buttons[12].set_image( *card[12] );	
+    // buttons[12].signal_clicked().connect(
+    //             sigc::bind(
+	// 								sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
+	// 								0));
+    // //table.attach(button[12], 12 % 13, (12 % 13) + 1, 12 / 13, (12 / 13) + 1);
+	// buttons[12].show();
+
+	for (int i = 0; i < 13; i++) {
+    buttons[i].signal_clicked().connect(
                 sigc::bind(
 									sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
-									0));
-	button.show();
-			
-	// Add the button to the box.
-	hbox.add( button );
+									i));
+      table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
+	buttons[i].show();
+	}
+	
 }
 
 PlayerHandView::~PlayerHandView() {
-	for (int i = 0; i < 13; i++ ) delete card[i];
+    for (int i = 0; i < 13; i++ ) delete card[i];
 }
 
-Gtk::HBox* PlayerHandView::getViewBox() {
-    return &hbox;
+Gtk::Table* PlayerHandView::getViewBox() {
+    return &table;
 }
 
 void PlayerHandView::onButtonClicked(int i) {
     cout << "button click event";
-    button.hide();
+    buttons[i].hide();
 }
