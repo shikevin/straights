@@ -7,7 +7,7 @@
 class MainWindow : public Gtk::Window {
 public:
 	MainWindow();
-	virtual ~MainWindow();
+	~MainWindow();
 	
 private:
     PlayerHandView                  handView;

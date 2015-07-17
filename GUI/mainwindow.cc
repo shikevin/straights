@@ -1,5 +1,8 @@
 #include "mainwindow.h"
+#include <iostream>
 #include <gtkmm/box.h>
+#include <gtkmm/table.h>
+using namespace std;
 
 // Sets the horizontal box to have homogeneous spacing (all elements are of the same size), and to put 10 pixels
 // between each widget. Initializes the pixel buffer for the null place holder card, and the 10 of spades.
@@ -23,9 +26,8 @@ MainWindow::MainWindow() {
 	
 	// Add the horizontal box for laying out the images to the frame.
 	frame.add(*handView.getViewBox());
-	
-	// The final step is to display this newly created widget.
-	show_all();
+
+    show_all();
 }
 
 MainWindow::~MainWindow() {
