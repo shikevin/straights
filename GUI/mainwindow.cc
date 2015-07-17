@@ -16,7 +16,7 @@ MainWindow::MainWindow() {
     handView = new PlayerHandView(&deck);
 		
 	// Sets the border width of the window.
-	set_border_width( 20 );
+	set_border_width( 25 );
 		
 	// Set the look of the frame.
 	frame.set_label_align( Gtk::ALIGN_LEFT, Gtk::ALIGN_TOP );
@@ -26,6 +26,7 @@ MainWindow::MainWindow() {
 	// Add the frame to the window. Windows can only hold one widget, same for frames.
 	add( frame );
 
+	mainBox.pack_start(*headerView.getHeaderView());
     mainBox.pack_start(*tableView->getViewBox());
 	mainBox.pack_start(*scoreView.getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());

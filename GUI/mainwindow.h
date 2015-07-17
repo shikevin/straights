@@ -5,6 +5,7 @@
 #include "playerhandview.h"
 #include "tableview.h"
 #include "ScoreBoardView.h"
+#include "HeaderView.h"
 
 class MainWindow : public Gtk::Window {
 public:
@@ -17,8 +18,10 @@ private:
     TableView*                      tableView;
     PlayerHandView*                 handView;
     ScoreBoardView					scoreView;
+    HeaderView						headerView;
 	Gtk::Frame                      frame; 
 	Gtk::VBox           			mainBox;
+
 
 };
 

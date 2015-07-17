@@ -16,16 +16,15 @@ public:
     Gtk::HBox* getScoreBox();
 	
 private:
-	int currScores[4];             // keep track of player scores? or can just ask for it
-	int numDiscards[4];				
+	int currPlayerID;             // store id of current player			
 	
 	// Member widgets:
 	Gtk::Button rageButtons[4];      		// buttons responsible for raging
 
 	Gtk::Label player1Label;
-	//Gtk::Label player2Label;
-	//Gtk::Label player3Label;
-	//Gtk::Label player4Label;
+	Gtk::Label player2Label;
+	Gtk::Label player3Label;
+	Gtk::Label player4Label;
 
 
 	Gtk::VBox player1Box;
@@ -33,12 +32,8 @@ private:
 	Gtk::VBox player3Box;
 	Gtk::VBox player4Box;
 
-	//Gtk::VBox player1subBox;
-	//Gtk::VBox player2subBox;
-	//Gtk::VBox player3subBox;
-	//Gtk::VBox player4subBox;
 
-	Gtk::HBox scoresBox;             // Horizontal box for aligning widgets in the window.
+	Gtk::HBox scoresBox;             // Horizontal box for aligning player button's boxes.
 
 };
 
