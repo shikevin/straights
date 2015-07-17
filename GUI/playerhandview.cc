@@ -15,31 +15,13 @@ using namespace std;
 PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : Component(), table( 1, 13, true ) {
     deck = deckPointer;	
 	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deck->getNullCardImage();
-    Card card = Card(SPADE, TEN);
-	const Glib::RefPtr<Gdk::Pixbuf> cardPixbuf     = deck->getCardImage(card );
 	
-    
-	// for (int i = 0; i < 10; i++) {
-	// 	std::ostringstream ss;
-	// 	ss << "I am " << i;
-	// 	buttons[i].set_label(ss.str());
-	// }
-	// Initialize 12 empty cards and place them in the box.
-	for (int i = 0; i < 12; i++ ) {
+	for (int i = 0; i < 13; i++ ) {
+        nullCards[i] = new Gtk::Image( nullCardPixbuf );
 		cards[i] = new Gtk::Image( nullCardPixbuf );
         buttons[i].set_image( *cards[i] );
 	} // for
 	
-	// Initialize the 5th card and place the image into the button.
-	cards[12] = new Gtk::Image( cardPixbuf );	
-	buttons[12].set_image( *cards[12] );	
-    // buttons[12].signal_clicked().connect(
-    //             sigc::bind(
-	// 								sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
-	// 								0));
-    // //table.attach(button[12], 12 % 13, (12 % 13) + 1, 12 / 13, (12 / 13) + 1);
-	// buttons[12].show();
-
 	for (int i = 0; i < 13; i++) {
     buttons[i].signal_clicked().connect(
                 sigc::bind(

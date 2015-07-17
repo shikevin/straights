@@ -3,6 +3,8 @@
 #include <gtkmm/box.h>
 #include "Card.h"
 #include <gtkmm/table.h>
+#include "playerselectiondialog.h"
+
 using namespace std;
 
 // Sets the horizontal box to have homogeneous spacing (all elements are of the same size), and to put 10 pixels
@@ -31,12 +33,34 @@ MainWindow::MainWindow() {
 	mainBox.pack_start(*scoreView.getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());
 
-    
 	// Add the horizontal box for laying out the images to the frame.
 	frame.add(mainBox);
 
 	// The final step is to display this newly created widget.
 	show_all();
+
+    startGame();
+}
+
+void MainWindow::startGame() {
+    string choices = invitePlayers();
+    gameLogic = new Table(0);
+    gameLogic.playGame(choices);
+}
+
+string MainWindow::invitePlayers() {
+    string choices = "";
+    for (int i = 0; i < 4; i++) {
+        string title = "Choose Type: Player " + to_string(i + 1);
+        char type;
+        do {
+            PlayerSelectionDialog selection(*this, title);
+            type = selection.getChoice();
+        } while (type == 'n');
+        cout << "Type for : " << i << " is "<< type << endl;
+        choices += type;
+    }
+    return choices;
 }
 
 MainWindow::~MainWindow() {

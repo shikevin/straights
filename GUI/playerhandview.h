@@ -24,6 +24,7 @@ private:
 	// Member widgets:
     Gtk::Image                    * cards[13];          // Images to display.
 	Gtk::Button buttons[13];
+    Gtk::Image * nullCards[13];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
 };
 
