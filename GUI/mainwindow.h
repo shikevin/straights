@@ -4,6 +4,7 @@
 #include <gtkmm/frame.h>
 #include "playerhandview.h"
 #include "ScoreBoardView.h"
+#include "HeaderView.h"
 
 class MainWindow : public Gtk::Window {
 public:
@@ -13,8 +14,10 @@ public:
 private:
     PlayerHandView                  handView;
     ScoreBoardView					scoreView;
+    HeaderView						headerView;
 	Gtk::Frame                      frame; 
 	Gtk::VBox           			mainBox;
+
 
 };
 
