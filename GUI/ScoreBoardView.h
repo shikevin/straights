@@ -6,6 +6,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/button.h>
 #include <gtkmm/frame.h>
+#include <gtkmm/label.h>
 
 
 class ScoreBoardView {
@@ -22,15 +23,20 @@ private:
 	Gtk::Button rageButtons[4];      		// buttons responsible for raging
 
 	Gtk::Label player1Label;
-	Gtk::Label player2Label;
-	Gtk::Label player3Label;
-	Gtk::Label player4Label;
+	//Gtk::Label player2Label;
+	//Gtk::Label player3Label;
+	//Gtk::Label player4Label;
 
 
-	Gtk::HBox player1Box;
-	Gtk::HBox player2Box;
-	Gtk::HBox player3Box;
-	Gtk::HBox player4Box;
+	Gtk::VBox player1Box;
+	Gtk::VBox player2Box;
+	Gtk::VBox player3Box;
+	Gtk::VBox player4Box;
+
+	//Gtk::VBox player1subBox;
+	//Gtk::VBox player2subBox;
+	//Gtk::VBox player3subBox;
+	//Gtk::VBox player4subBox;
 
 	Gtk::HBox scoresBox;             // Horizontal box for aligning widgets in the window.
 
