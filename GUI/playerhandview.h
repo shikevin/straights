@@ -7,14 +7,16 @@
 #include <gtkmm/frame.h>
 #include <gtkmm/table.h>
 
+#include "component.h"
 #include "DeckGUI.h"
 
-class PlayerHandView {
+class PlayerHandView : public Component {
 public:
 	PlayerHandView(DeckGUI*);
 	~PlayerHandView();
     Gtk::Table* getViewBox();
     void onButtonClicked(int);
+    void updateView();
 	
 private:
 	DeckGUI*                         deck;             // Knows all of the card pixel buffers.

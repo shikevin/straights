@@ -7,13 +7,15 @@
 #include <gtkmm/button.h>
 #include <gtkmm/frame.h>
 #include <gtkmm/label.h>
+#include "component.h"
 
 
-class ScoreBoardView {
+class ScoreBoardView : public Component {
 public:
 	ScoreBoardView();
 	virtual ~ScoreBoardView();
     Gtk::HBox* getScoreBox();
+    void updateView();
 	
 private:
 	int currPlayerID;             // store id of current player			

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TableView::TableView(DeckGUI* deckPointer) : table( 4, 13, true ) {
+TableView::TableView(DeckGUI* deckPointer) : Component(), table( 4, 13, true ) {
     deck = deckPointer;	
 
     for (unsigned suit = CLUB; suit <= SPADE; ++suit) {
@@ -54,4 +54,7 @@ void TableView::onButtonClicked(unsigned suit, unsigned rank) {
 
 Gtk::Table* TableView::getViewBox() {
     return &table;
+}
+
+void TableView::updateView() {
 }

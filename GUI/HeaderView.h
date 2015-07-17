@@ -10,13 +10,15 @@
 #include <gtkmm/dialog.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/entry.h>
+#include "component.h"
 
 
-class HeaderView {
+class HeaderView : public Component {
 public:
 	HeaderView();
-	virtual ~HeaderView();
+    virtual ~HeaderView();
     Gtk::HBox* getHeaderView();
+    void updateView();
 	
 private:
 	int seed;             // store inputed seed		

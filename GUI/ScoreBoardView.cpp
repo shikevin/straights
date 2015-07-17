@@ -1,7 +1,7 @@
 #include "ScoreBoardView.h"
 #include <string>
 
-ScoreBoardView::ScoreBoardView(): player1Label("Player 1\n\nScore: 0\nDiscards: 0\n"), player2Label("Player 2\n\nScore: 0\nDiscards: 0\n"), player3Label("Player 3\n\nScore: 0\nDiscards: 0\n"), player4Label("Player 4\n\nScore: 0\nDiscards: 0\n") {
+ScoreBoardView::ScoreBoardView():Component(), player1Label("Player 1\n\nScore: 0\nDiscards: 0\n"), player2Label("Player 2\n\nScore: 0\nDiscards: 0\n"), player3Label("Player 3\n\nScore: 0\nDiscards: 0\n"), player4Label("Player 4\n\nScore: 0\nDiscards: 0\n") {
 
 
 //init seperate boxes for players
@@ -34,8 +34,8 @@ ScoreBoardView::ScoreBoardView(): player1Label("Player 1\n\nScore: 0\nDiscards: 
 
 ScoreBoardView::~ScoreBoardView() {}
 
-
-
+void ScoreBoardView::updateView() {
+}
 
 Gtk::HBox* ScoreBoardView::getScoreBox() {
 	return &scoresBox;

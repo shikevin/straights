@@ -1,7 +1,7 @@
 #include "HeaderView.h"
 #include <string>
 
-HeaderView::HeaderView() {
+HeaderView::HeaderView(): Component() {
 
 	//initialize seed to 0
 	//if no seed, default to using 0
@@ -22,8 +22,8 @@ HeaderView::HeaderView() {
 
 HeaderView::~HeaderView() {}
 
-
-
+void HeaderView::updateView() {
+}
 
 Gtk::HBox* HeaderView::getHeaderView() {
 	return &headerBox;

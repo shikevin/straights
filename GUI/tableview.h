@@ -5,8 +5,9 @@
 #include <gtkmm/button.h>
 #include "Card.h"
 #include "DeckGUI.h"
+#include "component.h"
 
-class TableView {
+class TableView: public Component {
 public:
 	TableView(DeckGUI*);
 	~TableView();
@@ -14,6 +15,7 @@ public:
     void onButtonClicked(unsigned, unsigned);
     void clearTable();
     void showCard(Card);
+    void updateView();
 	
 private:
     DeckGUI* deck;
