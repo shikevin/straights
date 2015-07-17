@@ -9,6 +9,7 @@
 #include "Command.h"
 #include "Print.h"
 #include "Input.h"
+#include "GameState.h"
 
 /*
 responsible for controlling aspects of the game
@@ -22,7 +23,7 @@ Table has a deck
 
 class Table {
 public:
-	Table(int);
+	Table();
     ~Table();
     void playGame(std::string choices);
 
@@ -38,9 +39,8 @@ private:
 	void incrementCurrentPlayer();
     Command getComputerCommand(bool);
     Command getHumanInput(bool, bool);
-    Input* input;
-    Print* information;
 	Deck* deck;
 	Scoreboard* scoreboard;
+    GameState* gamestate;
 };
 #endif

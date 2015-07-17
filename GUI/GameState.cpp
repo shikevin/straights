@@ -1,12 +1,21 @@
-#include "GameState.cpp"
+#include "GameState.h"
 
 using namespace std;
 
-int GameState::getPlayerID() {
+const Card GameState::startCard = Card(SPADE, SEVEN);
+GameState::GameState() {
+}
+
+
+vector<Player*> GameStategetPlayersInGame() {
+    return playersInGame;
+}
+
+int GameState::getCurrentPlayerID() {
 	return currentPlayer->getPlayerID();
 }
 
-string GameState::getPlayerType() {
+string GameState::getCurrentPlayerType() {
 	return currentPlayer->getPlayerType();
 }
 

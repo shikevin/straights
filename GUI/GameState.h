@@ -2,16 +2,22 @@
 #include "Player.h"
 #include <vector>
 #include <string>
-
-using namespace std;
+#include "Card.h"
 
 class GameState : public Subject {
 
 public: 
-	int getPlayerID();
-	string getPlayerType();
+    GameState();
+    virtual ~GameState();
+	int getCurrentPlayerID();
+    std::string getCurrentPlayerType();
 	void updateCurrentPlayer( Player*);
+	std::vector<Player*> getPlayersInGame();
+    void nextPlayer();
 
 private:
 	Player* currentPlayer;
+    static const Card startCard;
+	std::vector<Player*> playersInGame;
+    int currentPlayer;
 };
