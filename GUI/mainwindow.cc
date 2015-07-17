@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <iostream>
 #include <gtkmm/box.h>
+#include "Card.h"
 #include <gtkmm/table.h>
 using namespace std;
 
@@ -28,11 +29,11 @@ MainWindow::MainWindow() {
     mainBox.pack_start(*tableView->getViewBox());
 	mainBox.pack_start(*scoreView.getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());
+
     
 	// Add the horizontal box for laying out the images to the frame.
 	frame.add(mainBox);
 
-	
 	// The final step is to display this newly created widget.
 	show_all();
 }

@@ -12,13 +12,15 @@ public:
 	~TableView();
     Gtk::Table* getViewBox();
     void onButtonClicked(unsigned, unsigned);
-    // void clearTable();
-    // void showCard();
+    void clearTable();
+    void showCard(Card);
 	
 private:
     DeckGUI* deck;
 	// Member widgets:
     Gtk::Image * card[SUIT_COUNT][RANK_COUNT];          // Images to display.
+    Gtk::Image * nullCards[SUIT_COUNT][RANK_COUNT];
+    // Gtk::Image * nullCard;
 	Gtk::Button buttons[SUIT_COUNT][RANK_COUNT];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
 };
