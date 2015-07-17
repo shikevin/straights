@@ -1,6 +1,6 @@
 CXX=g++
 CXXFLAGS = -Wall -O -g `pkg-config gtkmm-2.4 --cflags --libs`
-OBJS = DeckGUI.o mainwindow.o main.o playerhandview.o ScoreBoardView.o
+OBJS = deckGUI.o mainwindow.o main.o playerhandview.o ScoreBoardView.o Card.o tableview.o
 DEPENDS=$(OBJS:.o=.d)
 EXEC = other
 ${EXEC}: $(OBJS)

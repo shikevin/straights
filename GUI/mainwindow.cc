@@ -11,6 +11,8 @@ using namespace std;
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
 MainWindow::MainWindow() {
+    tableView = new TableView(&deck);
+    handView = new PlayerHandView(&deck);
 		
 	// Sets the border width of the window.
 	set_border_width( 20 );
@@ -23,8 +25,9 @@ MainWindow::MainWindow() {
 	// Add the frame to the window. Windows can only hold one widget, same for frames.
 	add( frame );
 
+    mainBox.pack_start(*tableView->getViewBox());
 	mainBox.pack_start(*scoreView.getScoreBox());
-	mainBox.pack_start(*handView.getViewBox());
+	mainBox.pack_start(*handView->getViewBox());
     
 	// Add the horizontal box for laying out the images to the frame.
 	frame.add(mainBox);

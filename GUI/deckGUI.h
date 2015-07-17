@@ -13,21 +13,20 @@
 #define __DECK_GUI_H
 
 #include <gdkmm/pixbuf.h>
+#include "Card.h"
 #include <vector>
 using std::vector;
-
-// Enumerated types to define the face and suit values.
-enum Faces { NINE, TEN, JACK, QUEEN, KING, ACE };
-enum Suits { DIAMOND, CLUB, HEART, SPADE };
 
 class DeckGUI {
 public:
 	DeckGUI();
 	virtual ~DeckGUI();
-	Glib::RefPtr<Gdk::Pixbuf> getCardImage( Faces f, Suits s );   // Returns the image for the specified card.
+	Glib::RefPtr<Gdk::Pixbuf> getCardImage( Card );   // Returns the image for the specified card.
 	Glib::RefPtr<Gdk::Pixbuf> getNullCardImage();                 // Returns the image to use for the placeholder.
 
 private:
 	vector< Glib::RefPtr< Gdk::Pixbuf > > deck;                   // Contains the pixel buffer images.
+
+    const char * image_names[SUIT_COUNT][RANK_COUNT];
 }; // DeckGUI
 #endif

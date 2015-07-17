@@ -1,5 +1,7 @@
 #include "playerhandview.h"
 #include <iostream>
+#include <string>
+#include "Card.h"
 #include <sstream>
 
 using namespace std;
@@ -10,10 +12,11 @@ using namespace std;
 // with an image in it.
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
-PlayerHandView::PlayerHandView() : table( 1, 13, true ) {
-		
-	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deck.getNullCardImage();
-	const Glib::RefPtr<Gdk::Pixbuf> cardPixbuf     = deck.getCardImage( TEN, SPADE );
+PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : table( 1, 13, true ) {
+    deck = deckPointer;	
+	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deck->getNullCardImage();
+    Card card = Card(SPADE, TEN);
+	const Glib::RefPtr<Gdk::Pixbuf> cardPixbuf     = deck->getCardImage(card );
 	
     
 	// for (int i = 0; i < 10; i++) {
@@ -23,13 +26,13 @@ PlayerHandView::PlayerHandView() : table( 1, 13, true ) {
 	// }
 	// Initialize 12 empty cards and place them in the box.
 	for (int i = 0; i < 12; i++ ) {
-		card[i] = new Gtk::Image( nullCardPixbuf );
-        buttons[i].set_image( *card[i] );
+		cards[i] = new Gtk::Image( nullCardPixbuf );
+        buttons[i].set_image( *cards[i] );
 	} // for
 	
 	// Initialize the 5th card and place the image into the button.
-	card[12] = new Gtk::Image( cardPixbuf );	
-	buttons[12].set_image( *card[12] );	
+	cards[12] = new Gtk::Image( cardPixbuf );	
+	buttons[12].set_image( *cards[12] );	
     // buttons[12].signal_clicked().connect(
     //             sigc::bind(
 	// 								sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
@@ -43,13 +46,14 @@ PlayerHandView::PlayerHandView() : table( 1, 13, true ) {
 									sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
 									i));
       table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
+      //table.attach(object, left, right, top, bottom);
 	buttons[i].show();
 	}
 	
 }
 
 PlayerHandView::~PlayerHandView() {
-    for (int i = 0; i < 13; i++ ) delete card[i];
+    for (int i = 0; i < 13; i++ ) delete cards[i];
 }
 
 Gtk::Table* PlayerHandView::getViewBox() {
@@ -57,6 +61,5 @@ Gtk::Table* PlayerHandView::getViewBox() {
 }
 
 void PlayerHandView::onButtonClicked(int i) {
-    cout << "button click event";
     buttons[i].hide();
 }
