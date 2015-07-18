@@ -32,6 +32,9 @@ private:
 	Gtk::Button buttons[13];
     Gtk::Image * nullCards[13];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
+
+
+    // Should be done in component but it seems to be segfaulting...
     MainWindow* mainWindow;
 };
 

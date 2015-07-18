@@ -3,6 +3,7 @@
 #include <gtkmm/box.h>
 #include "Card.h"
 #include <gtkmm/table.h>
+#include "validate.h"
 
 using namespace std;
 
@@ -78,5 +79,15 @@ string MainWindow::invitePlayers() {
 }
 
 void MainWindow::playerCommand(Command command) {
-    gameLogic->playerCommand(command);
+    try {
+        gameLogic->playerCommand(command);
+    } catch (Validate::PlayerQuitException &e) {
+        // handle quit
+    } catch (Validate::LegalPlayExistsException &e) {
+        // tell user to use the right card
+    } catch (Validate::IllegalPlayException &e) {
+        command.type = DISCARD;
+        playerCommand(command);
+    } catch (Validate::PrintDeckException &e) {
+    }
 }
