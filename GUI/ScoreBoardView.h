@@ -10,7 +10,7 @@
 #include "component.h"
 
 
-class ScoreBoardView : public Component {
+class ScoreBoardView : public ViewComponent {
 public:
 	ScoreBoardView();
 	virtual ~ScoreBoardView();

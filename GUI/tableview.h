@@ -7,7 +7,7 @@
 #include "DeckGUI.h"
 #include "component.h"
 
-class TableView: public Component {
+class TableView: public ViewComponent {
 public:
 	TableView(DeckGUI*);
 	~TableView();

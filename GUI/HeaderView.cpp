@@ -7,7 +7,7 @@
 
 using namespace std;
 
-HeaderView::HeaderView(): Component() {
+HeaderView::HeaderView(): ViewComponent() {
 
 	//initialize seed to 0
 	//if no seed, default to using 0
@@ -61,7 +61,7 @@ void HeaderView::onStartClicked() {
 	}
 
 	seedField.set_text(to_string(seed));
-    mainWindow->startGame();;
+    mainWindow->startGame(seed);
 }
 
 void HeaderView::onEndClicked() {

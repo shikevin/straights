@@ -12,7 +12,7 @@ using namespace std;
 // with an image in it.
 //
 // Since widgets cannot be shared, must use pixel buffers to share images.
-PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : Component(), table( 1, 13, true ) {
+PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : ViewComponent(), table( 1, 13, true ) {
     deck = deckPointer;	
 	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deck->getNullCardImage();
 	
@@ -47,4 +47,5 @@ void PlayerHandView::onButtonClicked(int i) {
 }
 
 void PlayerHandView::updateView() {
+    
 }

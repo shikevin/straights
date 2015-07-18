@@ -10,7 +10,7 @@
 #include "component.h"
 #include "DeckGUI.h"
 
-class PlayerHandView : public Component {
+class PlayerHandView : public ViewComponent {
 public:
 	PlayerHandView(DeckGUI*);
 	~PlayerHandView();

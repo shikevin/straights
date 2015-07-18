@@ -7,21 +7,23 @@
 
 using namespace std;
 
-TableController::TableController() {
+TableController::TableController(int seed, vector<ViewComponent*> views) {
     // input = new Input();
-	deck = new Deck(0); // seed goes here
+	deck = new Deck(seed); // seed goes here
 	// playersInGame.reserve(4);
     // information = new Print();
 	scoreboard = new Scoreboard();
     gameState = new GameState();
+    for (int i = 0; i < views.size(); i++) {
+        gameState->subscribe(views[i]);
+        views[i]->setDeck(deck);
+        views[i]->setScoreboard(scoreboard);
+        views[i]->setGameState(gameState);
+    }
 	//currentPlayer = 0;
 }
 
 TableController::~TableController() {
-    // for (int i = 0; i < playersInGame.size(); i++) {
-    //     delete playersInGame[i];
-    //     playersInGame[i] = NULL;
-    // }
     delete gameState;
     gameState = NULL;
     delete deck;
@@ -31,26 +33,25 @@ TableController::~TableController() {
 }
 
 void TableController::playGame(string choices) {
+    gameState->initializePlayers(choices);
+    scoreboard->newRound();
+    deck->newRound();
+    distributeCards();
+    gameState->newGame();
+    // handleComputerMove();
 }
 
-// int Table::findStartingPlayer() {
-//     for (int i = 0; i < playersInGame.size(); i++) {
-//         if (playersInGame[i]->hasCard(startCard)) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-// 
-// void Table::distributeCards() {
-//     vector<Card*> shuffled = deck->getDeck();  
-// 
-//     for (int i = 0; i < 4 ; i++) {
-//         for (int j = 1; j <=13; j++) {
-//             playersInGame[i]->addCardToHand(shuffled[(13*i)+j-1]);
-//         }
-//     }
-// }
+
+void TableController::distributeCards() {
+    vector<Card*> shuffled = deck->getDeck();  
+
+    for (int i = 0; i < 4 ; i++) {
+        for (int j = 1; j <=13; j++) {
+            gameState->getPlayersInGame()[i]->addCardToHand(shuffled[(13*i)+j-1]);
+        }
+    }
+}
+
 // 
 // void Table::initializePlayers(string choices) {
 // 	for(int i = 0; i < choices.size(); i++) {

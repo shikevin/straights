@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TableView::TableView(DeckGUI* deckPointer) : Component(), table( 4, 13, true ) {
+TableView::TableView(DeckGUI* deckPointer) : ViewComponent(), table( 4, 13, true ) {
     deck = deckPointer;	
 
     for (unsigned suit = CLUB; suit <= SPADE; ++suit) {

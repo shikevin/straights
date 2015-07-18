@@ -8,6 +8,7 @@
 #include "HeaderView.h"
 #include "TableController.h"
 #include "playerselectiondialog.h"
+#include "component.h"
 
 class HeaderView;
 
@@ -15,13 +16,14 @@ class MainWindow : public Gtk::Window {
 public:
 	MainWindow();
 	~MainWindow();
-    void startGame();
+    void startGame(int);
     // newRound();
     // newGame();
 	
 private:
     string invitePlayers();
 	DeckGUI                         deck;             // Knows all of the card pixel buffers.
+    std::vector<ViewComponent*> components;
 	
     TableController* gameLogic;
     TableView*                      tableView;

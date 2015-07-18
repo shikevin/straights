@@ -1,7 +1,7 @@
 #include "Subject.h"
 using namespace std;
 
-void Subject::subscribe(Component* newComponent) {
+void Subject::subscribe(ViewComponent* newComponent) {
 	myViewComponents.push_back(newComponent);
 }
 

@@ -1,19 +1,20 @@
 #ifndef _SUBJECT_
 #define _SUBJECT_
 
-#include "Component.h"
+#include "component.h"
 #include <vector>
 
+class ViewComponent;
 
 class Subject {
 public:
-    void subscribe(Component*);
+    void subscribe(ViewComponent*);
 
 protected:
     void notify();
 
 private:
-    std::vector<Component*> myViewComponents;
+    std::vector<ViewComponent*> myViewComponents;
 };
 
 #endif

@@ -15,7 +15,7 @@
 
 class MainWindow;
 
-class HeaderView : public Component {
+class HeaderView : public ViewComponent {
 public:
 	HeaderView();
     virtual ~HeaderView();

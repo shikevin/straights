@@ -34,6 +34,10 @@ MainWindow::MainWindow() {
 	mainBox.pack_start(*scoreView.getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());
 
+    components.push_back(dynamic_cast<ViewComponent*>(tableView));
+    components.push_back(dynamic_cast<ViewComponent*>(&scoreView));
+    components.push_back(dynamic_cast<ViewComponent*>(handView));
+
 	// Add the horizontal box for laying out the images to the frame.
 	frame.add(mainBox);
 
@@ -49,9 +53,9 @@ MainWindow::~MainWindow() {
     delete headerView;
 }
 
-void MainWindow::startGame() {
+void MainWindow::startGame(int seed) {
     string choices = invitePlayers();
-    gameLogic = new TableController();
+    gameLogic = new TableController(seed, components);
     gameLogic->playGame(choices);
 }
 

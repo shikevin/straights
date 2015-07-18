@@ -6,6 +6,7 @@
 #include "Deck.h"
 #include <vector>
 #include <string>
+#include "component.h"
 #include "GameState.h"
 
 /*
@@ -20,7 +21,7 @@ Table has a deck
 
 class TableController {
 public:
-	TableController();
+	TableController(int, std::vector<ViewComponent*>);
     ~TableController();
     void playGame(std::string choices);
 
@@ -30,7 +31,7 @@ private:
 //    static const Card startCard;
 //	std::vector<Player*> playersInGame;
 //    bool isGameOver();
-//    void distributeCards();
+    void distributeCards();
 //    int findStartingPlayer();
 //	void initializePlayers(std::string); // string passed in is "choices" from main
 	//void incrementCurrentPlayer();
