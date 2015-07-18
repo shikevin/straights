@@ -6,7 +6,7 @@
 #include "tableview.h"
 #include "ScoreBoardView.h"
 #include "HeaderView.h"
-// #include "TableController.h"
+#include "TableController.h"
 #include "playerselectiondialog.h"
 
 class HeaderView;
@@ -23,7 +23,7 @@ private:
     string invitePlayers();
 	DeckGUI                         deck;             // Knows all of the card pixel buffers.
 	
-    // TableController* gameLogic;
+    TableController* gameLogic;
     TableView*                      tableView;
     PlayerHandView*                 handView;
     ScoreBoardView					scoreView;

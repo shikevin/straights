@@ -51,8 +51,8 @@ MainWindow::~MainWindow() {
 
 void MainWindow::startGame() {
     string choices = invitePlayers();
-//     gameLogic = new TableController(0);
-//     gameLogic.playGame(choices);
+    gameLogic = new TableController();
+    gameLogic->playGame(choices);
 }
 
 string MainWindow::invitePlayers() {
