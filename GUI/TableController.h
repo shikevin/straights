@@ -6,9 +6,6 @@
 #include "Deck.h"
 #include <vector>
 #include <string>
-#include "Command.h"
-#include "Print.h"
-#include "Input.h"
 #include "GameState.h"
 
 /*
@@ -21,26 +18,26 @@ Table has a scoreboard
 Table has a deck
  */
 
-class Table {
+class TableController {
 public:
-	Table();
-    ~Table();
+	TableController();
+    ~TableController();
     void playGame(std::string choices);
 
 private:
-    bool isRoundOver();
-    void executeMove(Command, bool);
-    static const Card startCard;
-	std::vector<Player*> playersInGame;
-    bool isGameOver();
-    void distributeCards();
-    int findStartingPlayer();
-	void initializePlayers(std::string); // string passed in is "choices" from main
-	void incrementCurrentPlayer();
-    Command getComputerCommand(bool);
-    Command getHumanInput(bool, bool);
+//    bool isRoundOver();
+//    void executeMove(Command, bool);
+//    static const Card startCard;
+//	std::vector<Player*> playersInGame;
+//    bool isGameOver();
+//    void distributeCards();
+//    int findStartingPlayer();
+//	void initializePlayers(std::string); // string passed in is "choices" from main
+	//void incrementCurrentPlayer();
+   // Command getComputerCommand(bool);
+   // Command getHumanInput(bool, bool);
 	Deck* deck;
 	Scoreboard* scoreboard;
-    GameState* gamestate;
+    GameState* gameState;
 };
 #endif
