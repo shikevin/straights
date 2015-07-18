@@ -9,22 +9,14 @@
 #include <string>
 #include "component.h"
 #include "GameState.h"
-
-/*
-responsible for controlling aspects of the game
-
-main creates the object Table
-
-Table has a list of players
-Table has a scoreboard
-Table has a deck
- */
+#include "validate.h"
 
 class TableController {
 public:
 	TableController(int, std::vector<ViewComponent*>);
     ~TableController();
     void playGame(std::string choices);
+    void playerCommand(Command);
 
 private:
     bool isRoundOver();
@@ -39,8 +31,10 @@ private:
     Command generateComputerCommand();
    // Command getHumanInput(bool, bool);
     void handleComputerMove();
+    bool doesPlayableCardExist();
 	Deck* deck;
 	Scoreboard* scoreboard;
+    Validate* validation;
     GameState* gameState;
 };
 #endif

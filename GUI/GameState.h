@@ -10,7 +10,6 @@
 #include "Card.h"
 
 class ViewComponent;
-
 class GameState {
 public: 
     GameState();

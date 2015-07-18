@@ -14,6 +14,7 @@ TableController::TableController(int seed, vector<ViewComponent*> views) {
     // information = new Print();
 	scoreboard = new Scoreboard();
     gameState = new GameState();
+    validation = new Validate();
     for (int i = 0; i < views.size(); i++) {
         gameState->subscribe(views[i]);
         views[i]->setDeck(deck);
@@ -24,6 +25,8 @@ TableController::TableController(int seed, vector<ViewComponent*> views) {
 }
 
 TableController::~TableController() {
+    delete validation;
+    validation = NULL;
     delete gameState;
     gameState = NULL;
     delete deck;
@@ -61,6 +64,18 @@ void TableController::handleComputerMove() {
     }
 }
 
+void TableController::playerCommand(Command command) {
+    if (gameState->getCurrentPlayer()->getPlayerType() == "c" || isRoundOver()) {
+        return;
+    }
+    // round is not over
+    Command validCommand = validation->validCommand(command, doesPlayableCardExist(), *deck, gameState->isFirstPlayer(), gameState->startCard);
+
+    executeMove(validCommand);
+    gameState->incrementPlayer();
+    handleComputerMove();
+}
+
 Command TableController::generateComputerCommand() {
     vector<Card*> playerCards = gameState->getCurrentPlayer()->getCardsInHand();
     Command computerCommand = Command();
@@ -94,6 +109,20 @@ void TableController::executeMove(Command move) {
         gameState->rageQuitPlayer();
         executeMove(generateComputerCommand());
     }
+}
+
+bool TableController::doesPlayableCardExist() {
+    if (gameState->isFirstPlayer()) {
+        return true;
+    }
+    bool legalCardExists = false;
+    vector<Card*> playerCards = gameState->getCurrentPlayer()->getCardsInHand();
+    for (int i = 0; i < playerCards.size(); i++) {
+        if (deck->isCardPlayable(*playerCards[i])) {
+            legalCardExists = true;
+        }
+    }
+    return legalCardExists;
 }
 
 void TableController::distributeCards() {

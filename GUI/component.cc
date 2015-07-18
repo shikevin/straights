@@ -14,3 +14,7 @@ void ViewComponent::setScoreboard(Scoreboard* a) {
 void ViewComponent::setGameState(GameState* a) {
     gamestate = a;
 }
+
+// void ViewComponent::setMainWindow(MainWindow* a) {
+//     mainWindow = a;
+// }

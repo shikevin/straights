@@ -10,17 +10,20 @@
 #include "Card.h"
 
 #include "component.h"
+#include "mainwindow.h"
 #include "DeckGUI.h"
 
+class MainWindow;
 class PlayerHandView : public ViewComponent {
 public:
 	PlayerHandView(DeckGUI*);
 	~PlayerHandView();
     Gtk::Table* getViewBox();
-    void onButtonClicked(int);
     void updateView();
+    void setMainWindow(MainWindow*);
 	
 private:
+    void onButtonClicked(int);
     void displayCards(Player*);
 	DeckGUI*                         deckGUI;             // Knows all of the card pixel buffers.
     	
@@ -29,6 +32,10 @@ private:
 	Gtk::Button buttons[13];
     Gtk::Image * nullCards[13];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
+
+
+    // Should be done in component but it seems to be segfaulting...
+    MainWindow* mainWindow;
 };
 
 #endif

@@ -7,6 +7,8 @@
 #include "DeckGUI.h"
 #include "component.h"
 
+class MainWindow;
+
 class TableView: public ViewComponent {
 public:
 	TableView(DeckGUI*);
@@ -16,6 +18,7 @@ public:
     void clearTable();
     void showCard(Card);
     void updateView();
+    void setMainWindow(MainWindow*);
 	
 private:
     DeckGUI* deckGUI;
@@ -25,6 +28,9 @@ private:
     // Gtk::Image * nullCard;
 	Gtk::Button buttons[SUIT_COUNT][RANK_COUNT];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
+    
+    // Should be done in component but it seems to be segfaulting...
+    MainWindow* mainWindow;
 };
 
 #endif

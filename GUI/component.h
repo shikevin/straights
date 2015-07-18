@@ -6,6 +6,7 @@
 #include "GameState.h"
 
 class GameState;
+
 class ViewComponent {
 public:
 	ViewComponent();
@@ -14,11 +15,13 @@ public:
     void setDeck(Deck*);
     void setScoreboard(Scoreboard*);
     void setGameState(GameState*);
+    // void setMainWindow(MainWindow*);
 	
 protected:
     Deck* deck;
     Scoreboard* scoreboard;
     GameState* gamestate;
+    // MainWindow* mainWindow;
 
 private:
 

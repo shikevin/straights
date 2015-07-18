@@ -11,7 +11,6 @@
 #include <gtkmm/stock.h>
 #include <gtkmm/entry.h>
 #include "mainwindow.h"
-#include "component.h"
 
 class MainWindow;
 
@@ -27,7 +26,6 @@ private:
     void onStartClicked();
     void onEndClicked();
 	int seed;             // store inputed seed		
-    MainWindow* mainWindow;
 	
 	// Member widgets:
 	Gtk::Button startButton;
@@ -35,6 +33,7 @@ private:
 	Gtk::Entry seedField;
 	Gtk::HBox headerBox;
 
+    MainWindow* mainWindow;
 };
 
 #endif
