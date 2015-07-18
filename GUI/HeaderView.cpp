@@ -35,10 +35,6 @@ HeaderView::HeaderView(): ViewComponent() {
 
 HeaderView::~HeaderView() {}
 
-void HeaderView::setMainWindow(MainWindow* window) {
-    mainWindow = window;
-}
-
 void HeaderView::updateView() {
 }
 
@@ -68,4 +64,6 @@ void HeaderView::onEndClicked() {
 	exit(0);
 }
 
-
+void HeaderView::setMainWindow(MainWindow* a) {
+    mainWindow = a;
+}

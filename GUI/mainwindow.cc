@@ -3,16 +3,9 @@
 #include <gtkmm/box.h>
 #include "Card.h"
 #include <gtkmm/table.h>
-#include "playerselectiondialog.h"
 
 using namespace std;
 
-// Sets the horizontal box to have homogeneous spacing (all elements are of the same size), and to put 10 pixels
-// between each widget. Initializes the pixel buffer for the null place holder card, and the 10 of spades.
-// Puts a frame in the window, and lays out the widgets horizontally. Four widgets are images, the fifth is a button
-// with an image in it.
-//
-// Since widgets cannot be shared, must use pixel buffers to share images.
 MainWindow::MainWindow() {
     tableView = new TableView(&deck);
     handView = new PlayerHandView(&deck);
@@ -44,6 +37,12 @@ MainWindow::MainWindow() {
 	// The final step is to display this newly created widget.
 	show_all();
 
+    // THIS SHOULD WORK BUT IS SEGFAULTING
+    // for (int i = 0; i < components.size(); i++) {
+    //     components[i]->setMainWindow(this);
+    // }
+    tableView->setMainWindow(this);
+    handView->setMainWindow(this);
     headerView->setMainWindow(this);
 }
 
@@ -54,8 +53,10 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::startGame(int seed) {
+    cout << "hasn't failed yet" << endl;
     string choices = invitePlayers();
     gameLogic = new TableController(seed, components);
+    cout << "hasn't failed yet" << endl;
     gameLogic->playGame(choices);
 }
 
@@ -65,11 +66,17 @@ string MainWindow::invitePlayers() {
         string title = "Choose Type: Player " + to_string(i + 1);
         char type;
         do {
+            cout << "fail 1" << endl;
             PlayerSelectionDialog selection(*this, title);
+            cout << "fail 2" << endl;
             type = selection.getChoice();
         } while (type == 'n');
         cout << "Type for : " << i << " is "<< type << endl;
         choices += type;
     }
     return choices;
+}
+
+void MainWindow::playerCommand(Command command) {
+    gameLogic->playerCommand(command);
 }

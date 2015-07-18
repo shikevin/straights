@@ -65,3 +65,7 @@ void TableView::updateView() {
         }
     }
 }
+
+void TableView::setMainWindow(MainWindow* a) {
+    mainWindow = a;
+}

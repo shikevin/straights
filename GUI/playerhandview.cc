@@ -1,16 +1,11 @@
 #include "playerhandview.h"
 #include <iostream>
+#include "Command.h"
 #include <string>
 #include <sstream>
 
 using namespace std;
 
-// Sets the horizontal box to have homogeneous spacing (all elements are of the same size), and to put 10 pixels
-// between each widget. Initializes the pixel buffer for the null place holder card, and the 10 of spades.
-// Puts a frame in the window, and lays out the widgets horizontally. Four widgets are images, the fifth is a button
-// with an image in it.
-//
-// Since widgets cannot be shared, must use pixel buffers to share images.
 PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : ViewComponent(), table( 1, 13, true ) {
     deckGUI = deckPointer;	
 	const Glib::RefPtr<Gdk::Pixbuf> nullCardPixbuf = deckGUI->getNullCardImage();
@@ -33,7 +28,7 @@ PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : ViewComponent(), table( 1
 									i));
       table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
       //table.attach(object, left, right, top, bottom);
-	buttons[i].show();
+	buttons[i].hide();
 	}
 	
 }
@@ -52,14 +47,24 @@ Gtk::Table* PlayerHandView::getViewBox() {
 }
 
 void PlayerHandView::onButtonClicked(int i) {
-    buttons[i].hide();
+    if (gamestate->getCurrentPlayer()->getPlayerType() == "h") {
+        vector<Card*> playerCards = gamestate->getCurrentPlayer()->getCardsInHand();
+        Command humanCommand = Command();
+        humanCommand.type = PLAY;
+        humanCommand.card = *playerCards[i];
+        mainWindow -> playerCommand(humanCommand);
+    }
 }
 
 void PlayerHandView::displayCards(Player* currentPlayer) {
     vector<Card*> playerCards = currentPlayer->getCardsInHand();
-    for (int i = 0; i < playerCards.size(); i++) {
-        cout << "Suit: " << playerCards[i]->getSuit() << " Rank: " << playerCards[i]->getRank() << endl;
-        buttons[i].set_image(*cards[playerCards[i]->getSuit()][playerCards[i]->getRank()]);
+    for (int i = 0; i < 13; i++) {
+        if (i < playerCards.size()) {
+            buttons[i].set_image(*cards[playerCards[i]->getSuit()][playerCards[i]->getRank()]);
+            buttons[i].show();
+        } else {
+            buttons[i].hide();
+        }
     }
 }
 void PlayerHandView::updateView() {
@@ -67,4 +72,8 @@ void PlayerHandView::updateView() {
     if (currentPlayer->getPlayerType() == "h") {
         displayCards(currentPlayer);
     }
+}
+
+void PlayerHandView::setMainWindow(MainWindow* a) {
+    mainWindow = a;
 }

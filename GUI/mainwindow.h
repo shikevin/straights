@@ -10,13 +10,16 @@
 #include "playerselectiondialog.h"
 #include "component.h"
 
+class PlayerHandView;
 class HeaderView;
+class TableView;
 
 class MainWindow : public Gtk::Window {
 public:
 	MainWindow();
 	~MainWindow();
     void startGame(int);
+    void playerCommand(Command);
     // newRound();
     // newGame();
 	
