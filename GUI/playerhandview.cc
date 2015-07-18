@@ -28,6 +28,7 @@ PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : ViewComponent(), table( 1
 									i));
       table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
       //table.attach(object, left, right, top, bottom);
+    buttons[i].set_sensitive(false);
 	buttons[i].hide();
 	}
 	
@@ -59,6 +60,7 @@ void PlayerHandView::onButtonClicked(int i) {
 void PlayerHandView::displayCards(Player* currentPlayer) {
     vector<Card*> playerCards = currentPlayer->getCardsInHand();
     for (int i = 0; i < 13; i++) {
+        buttons[i].set_sensitive(true);
         if (i < playerCards.size()) {
             buttons[i].set_image(*cards[playerCards[i]->getSuit()][playerCards[i]->getRank()]);
             buttons[i].show();
