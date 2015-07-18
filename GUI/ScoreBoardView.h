@@ -18,6 +18,7 @@ public:
     void updateView();
 	
 private:
+	static const int NUM_PLAYERS = 4;
 	int currPlayerID;             // store id of current player			
 	
 	// Member widgets:
@@ -28,6 +29,9 @@ private:
 	Gtk::Label player3Label;
 	Gtk::Label player4Label;
 
+
+std::vector<Gtk::Label> labels;
+std::vector<Gtk::VBox> playerBoxes;
 
 	Gtk::VBox player1Box;
 	Gtk::VBox player2Box;

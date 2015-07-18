@@ -1,9 +1,36 @@
 #include "ScoreBoardView.h"
 #include <string>
 
-ScoreBoardView::ScoreBoardView():ViewComponent(), player1Label("Player 1\n\nScore: 0\nDiscards: 0\n"), player2Label("Player 2\n\nScore: 0\nDiscards: 0\n"), player3Label("Player 3\n\nScore: 0\nDiscards: 0\n"), player4Label("Player 4\n\nScore: 0\nDiscards: 0\n") {
+using namespace std;
+
+ScoreBoardView::ScoreBoardView():ViewComponent(), player1Label("\nPlayer 1\n\nScore: 0\nDiscards: 0\n"), player2Label("\nPlayer 2\n\nScore: 0\nDiscards: 0\n"), player3Label("\nPlayer 3\n\nScore: 0\nDiscards: 0\n"), player4Label("\nPlayer 4\n\nScore: 0\nDiscards: 0\n") {
 
 
+string player ="\nPlayer\n";
+string score = "\nScore: ";
+string discards = "\nDiscards: ";
+
+
+
+for(int i = 0; i < NUM_PLAYERS; i++) {
+
+	stringstream playerStats;
+	playerStats << player << i+1 << score << 0 << discards << 0 << endl;
+	string result = playerStats.str();
+
+
+	labels[i].set_text(result);
+	//playerBoxes.push_back(Gtk::VBox y);
+	rageButtons[i].set_label("RAGEQUIT");
+
+
+
+
+
+
+}
+
+/*
 //init seperate boxes for players
 	scoresBox.pack_start(player1Box);
 	scoresBox.pack_start(player2Box);
@@ -27,7 +54,7 @@ ScoreBoardView::ScoreBoardView():ViewComponent(), player1Label("Player 1\n\nScor
 	for(int i = 0; i < 4; i++) {
 		rageButtons[i].set_label("HULK MODE");
 	}
-
+*/
 	scoresBox.show();
 
 }
@@ -35,6 +62,8 @@ ScoreBoardView::ScoreBoardView():ViewComponent(), player1Label("Player 1\n\nScor
 ScoreBoardView::~ScoreBoardView() {}
 
 void ScoreBoardView::updateView() {
+	//update labels for each of the boxes
+
 }
 
 Gtk::HBox* ScoreBoardView::getScoreBox() {
