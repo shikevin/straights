@@ -30,7 +30,7 @@ for(int i = 0; i < NUM_PLAYERS; i++) {
 
 }
 
-/*
+
 //init seperate boxes for players
 	scoresBox.pack_start(player1Box);
 	scoresBox.pack_start(player2Box);
@@ -54,7 +54,7 @@ for(int i = 0; i < NUM_PLAYERS; i++) {
 	for(int i = 0; i < 4; i++) {
 		rageButtons[i].set_label("HULK MODE");
 	}
-*/
+
 	scoresBox.show();
 
 }
