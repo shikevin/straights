@@ -38,9 +38,63 @@ void TableController::playGame(string choices) {
     deck->newRound();
     distributeCards();
     gameState->newGame();
-    // handleComputerMove();
+    handleComputerMove();
 }
 
+// TO-DO: IS GAME OVER??????
+bool TableController::isRoundOver() {
+    vector<Player*> players = gameState->getPlayersInGame();
+    for (int i = 0; i < players.size(); i++) {
+        if (players[i]->getCardsInHand().size() > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void TableController::handleComputerMove() {
+    while (!isRoundOver() && gameState->getCurrentPlayer()->getPlayerType() == "c") {
+        Command command;
+        command = generateComputerCommand();
+        executeMove(command);
+        gameState->incrementPlayer();
+    }
+}
+
+Command TableController::generateComputerCommand() {
+    vector<Card*> playerCards = gameState->getCurrentPlayer()->getCardsInHand();
+    Command computerCommand = Command();
+    if (gameState->isFirstPlayer()) {
+        computerCommand.type = PLAY;
+        computerCommand.card = gameState->startCard;
+        return computerCommand;
+    }
+    for (int i = 0; i < playerCards.size(); i++) {
+        if (deck->isCardPlayable(*playerCards[i])) {
+            computerCommand.type = PLAY;
+            computerCommand.card = Card(playerCards[i]->getSuit(), playerCards[i]->getRank());
+            return computerCommand;
+        }
+    }
+    // discard if no playable card is found
+    computerCommand.type = DISCARD;
+    computerCommand.card = Card(playerCards[0]->getSuit(), playerCards[0]->getRank());
+    return computerCommand;
+}
+
+void TableController::executeMove(Command move) {
+    Player* playerPointer = gameState->getCurrentPlayer();
+    if (move.type == PLAY) {
+        playerPointer->play(move.card);
+        deck->play(deck->getCard(move.card));
+    } else if(move.type == DISCARD) {
+    	playerPointer->discard(deck->getCard(move.card));
+    	scoreboard->discard(playerPointer->getPlayerID(), move.card);
+    } else if(move.type == RAGEQUIT) {
+        gameState->rageQuitPlayer();
+        executeMove(generateComputerCommand());
+    }
+}
 
 void TableController::distributeCards() {
     vector<Card*> shuffled = deck->getDeck();  
@@ -52,19 +106,6 @@ void TableController::distributeCards() {
     }
 }
 
-// 
-// void Table::initializePlayers(string choices) {
-// 	for(int i = 0; i < choices.size(); i++) {
-// 		if(choices.at(i) == 'h') {
-// 			HumanPlayer* human = new HumanPlayer("h");
-// 			playersInGame.push_back(human);
-// 		} else {
-// 			ComputerPlayer* computer = new ComputerPlayer("c");
-// 			playersInGame.push_back(computer);
-// 		}
-// 	}
-// }
-// 
 // bool Table::isGameOver() {
 //     for (int i=0; i<playersInGame.size(); i++) {
 //         if (scoreboard->getCurrentScore(i) + scoreboard->getOldScore(i) >= 80) {
@@ -74,14 +115,6 @@ void TableController::distributeCards() {
 //     return false;
 // }
 // 
-// bool Table::isRoundOver() {
-//     for (int i = 0; i < playersInGame.size(); i++) {
-//         if (playersInGame[i]->getCardsInHand().size() > 0) {
-//             return false;
-//         }
-//     }
-//     return true;
-// }
 // 
 // void Table::playGame(string choices) {
 //     // start up the game
@@ -151,49 +184,4 @@ void TableController::distributeCards() {
 //     return validCommand;
 // }
 // 
-// Command Table::getComputerCommand(bool isFirstPlayer) {
-//     vector<Card*> playerCards = playersInGame[currentPlayer]->getCardsInHand();
-//     Command computerCommand = Command();
-//     if (isFirstPlayer) {
-//         computerCommand.type = PLAY;
-//         computerCommand.card = startCard;
-//         return computerCommand;
-//     }
-//     for (int i = 0; i < playerCards.size(); i++) {
-//         if (deck->isCardPlayable(*playerCards[i])) {
-//             computerCommand.type = PLAY;
-//             computerCommand.card = Card(playerCards[i]->getSuit(), playerCards[i]->getRank());
-//             return computerCommand;
-//         }
-//     }
-//     // discard if no playable card is found
-//     computerCommand.type = DISCARD;
-//     computerCommand.card = Card(playerCards[0]->getSuit(), playerCards[0]->getRank());
-//     return computerCommand;
-// }
 // 
-// void Table::executeMove(Command move, bool isFirstPlayer) {
-//     Player* playerPointer = playersInGame[currentPlayer];
-//     if (move.type == PLAY) {
-//         information->printMove(currentPlayer, move);
-//         playerPointer->play(move.card);
-//         deck->play(deck->getCard(move.card));
-//     } else if(move.type == DISCARD) {
-//         information->printMove(currentPlayer, move);
-//     	playerPointer->discard(deck->getCard(move.card));
-//     	scoreboard->discard(currentPlayer, move.card);
-//     } else if(move.type == RAGEQUIT) {
-//         information->printRage(currentPlayer);
-//         Player* temp = playerPointer;
-//         playerPointer = static_cast<HumanPlayer*>(playerPointer)->ragequit();
-//         playersInGame[currentPlayer] = playerPointer;
-//         delete temp;
-//         executeMove(getComputerCommand(isFirstPlayer), isFirstPlayer);
-//     }
-// }
-// 
-// 
-// void Table::incrementCurrentPlayer() {
-// 	currentPlayer++;
-// 	currentPlayer %= 4;
-// }

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Scoreboard.h"
 #include "Deck.h"
+#include "Command.h"
 #include <vector>
 #include <string>
 #include "component.h"
@@ -26,8 +27,8 @@ public:
     void playGame(std::string choices);
 
 private:
-//    bool isRoundOver();
-//    void executeMove(Command, bool);
+    bool isRoundOver();
+    void executeMove(Command);
 //    static const Card startCard;
 //	std::vector<Player*> playersInGame;
 //    bool isGameOver();
@@ -35,8 +36,9 @@ private:
 //    int findStartingPlayer();
 //	void initializePlayers(std::string); // string passed in is "choices" from main
 	//void incrementCurrentPlayer();
-   // Command getComputerCommand(bool);
+    Command generateComputerCommand();
    // Command getHumanInput(bool, bool);
+    void handleComputerMove();
 	Deck* deck;
 	Scoreboard* scoreboard;
     GameState* gameState;

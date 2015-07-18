@@ -5,12 +5,12 @@
 using namespace std;
 
 TableView::TableView(DeckGUI* deckPointer) : ViewComponent(), table( 4, 13, true ) {
-    deck = deckPointer;	
+    deckGUI = deckPointer;	
 
     for (unsigned suit = CLUB; suit <= SPADE; ++suit) {
         for (unsigned rank = ACE; rank<= KING; ++rank) {
-            nullCards[suit][rank] = new Gtk::Image(deck->getNullCardImage());
-            card[suit][rank] = new Gtk::Image(deck->getCardImage(Card((Suit)suit,(Rank)rank)));
+            nullCards[suit][rank] = new Gtk::Image(deckGUI->getNullCardImage());
+            card[suit][rank] = new Gtk::Image(deckGUI->getCardImage(Card((Suit)suit,(Rank)rank)));
             // use the onButtonClicked as debug tool
             buttons[suit][rank].set_image(*nullCards[suit][rank]);
             buttons[suit][rank].signal_clicked().connect(
@@ -57,4 +57,11 @@ Gtk::Table* TableView::getViewBox() {
 }
 
 void TableView::updateView() {
+    for (unsigned suit = CLUB; suit < SUIT_COUNT; ++suit) {
+        for (unsigned rank = ACE; rank < RANK_COUNT; ++rank) {
+            if (deck->isCardOnTable(Card((Suit)suit,(Rank)rank))) {
+                buttons[suit][rank].set_image(*card[suit][rank]);
+            }
+        }
+    }
 }

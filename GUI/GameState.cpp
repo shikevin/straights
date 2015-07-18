@@ -26,28 +26,58 @@ void GameState::initializePlayers(string choices) {
 	}
 }
 
+bool GameState::isFirstPlayer() const {
+    return firstPlayer;
+}
+
+void GameState::incrementPlayer() {
+    currentPlayer++;
+    currentPlayer %= playersInGame.size();
+    // next round, figure out next player
+    // set currentPlayer to nextPlayer
+    firstPlayer = false;
+    notify();
+}
+
 void GameState::findFirstPlayer() {
     for (int i = 0; i < playersInGame.size(); i++) {
         if (playersInGame[i]->hasCard(startCard)) {
-            currentPlayer = playersInGame[i];
+            currentPlayer = playersInGame[i]->getPlayerID();
+            return;
         }
     }
-    currentPlayer = NULL;
+    currentPlayer = -1;
 }
 
 void GameState::newGame() {
+    firstPlayer = true;
     findFirstPlayer();
     notify();
 }
 
+void GameState::rageQuitPlayer() {
+    Player* player;
+    Player* temp = playersInGame[currentPlayer];
+    player = static_cast<HumanPlayer*>(playersInGame[currentPlayer])->ragequit();
+    playersInGame[currentPlayer] = player;
+    delete temp;
+}
 void GameState::subscribe(ViewComponent* newComponent) {
 	myViewComponents.push_back(newComponent);
+}
+
+string GameState::getPlayerType() {
+    return playersInGame[currentPlayer]->getPlayerType();
 }
 
 void GameState::notify() {
 	for(int i = 0; i < myViewComponents.size(); i++) {
 		myViewComponents[i]->updateView();
 	}
+}
+
+Player* GameState::getCurrentPlayer() const{
+    return playersInGame[currentPlayer];
 }
 // GameState::GameState() {
 // }

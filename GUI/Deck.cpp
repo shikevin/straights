@@ -62,6 +62,14 @@ Card* Deck::getCard(const Card& card) {
     }
     return NULL;
 }
+
+bool Deck::isCardOnTable(const Card& checkCard) const {
+    if (onTable_[checkCard.getSuit()][checkCard.getRank()] != NULL) {
+        return true;
+    }
+    return false;
+}
+
 void Deck::play(Card* card) {
     onTable_[card->getSuit()][card->getRank()] = card;
 }

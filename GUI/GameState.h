@@ -22,15 +22,21 @@ public:
 //	void updateCurrentPlayer( Player*);
 	std::vector<Player*> getPlayersInGame();
     void newGame();
+    void rageQuitPlayer();
+    Player* getCurrentPlayer() const;
+    bool isFirstPlayer() const;
+    std::string getPlayerType();
+    void incrementPlayer();
+    static const Card startCard;
 //    void nextPlayer();
 
 private:
-	Player* currentPlayer;
-    static const Card startCard;
+	int currentPlayer;
 	std::vector<Player*> playersInGame;
     void findFirstPlayer();
     void notify();
     std::vector<ViewComponent*> myViewComponents;
+    bool firstPlayer;
 //    int currentPlayer;
 };
 

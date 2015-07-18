@@ -17,6 +17,7 @@ public:
 
     friend std::ostream& operator<< (std::ostream&, const Deck&);
     bool isCardPlayable(const Card&) const;
+    bool isCardOnTable(const Card&) const;
     static const int CARDS_IN_DECK = 52;
 
 private:

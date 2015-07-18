@@ -18,7 +18,7 @@ public:
     void updateView();
 	
 private:
-    DeckGUI* deck;
+    DeckGUI* deckGUI;
 	// Member widgets:
     Gtk::Image * card[SUIT_COUNT][RANK_COUNT];          // Images to display.
     Gtk::Image * nullCards[SUIT_COUNT][RANK_COUNT];
