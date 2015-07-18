@@ -6,7 +6,6 @@
 #include "GameState.h"
 
 class GameState;
-
 class ViewComponent {
 public:
 	ViewComponent();

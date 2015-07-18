@@ -40,6 +40,15 @@ void GameState::newGame() {
     notify();
 }
 
+void GameState::subscribe(ViewComponent* newComponent) {
+	myViewComponents.push_back(newComponent);
+}
+
+void GameState::notify() {
+	for(int i = 0; i < myViewComponents.size(); i++) {
+		myViewComponents[i]->updateView();
+	}
+}
 // GameState::GameState() {
 // }
 // 
