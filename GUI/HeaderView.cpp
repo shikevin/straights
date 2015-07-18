@@ -1,5 +1,6 @@
 #include "HeaderView.h"
 #include <iostream>
+#include "mainwindow.h"
 #include <string>
 
 using namespace std;
@@ -28,6 +29,10 @@ HeaderView::HeaderView(): Component() {
 
 HeaderView::~HeaderView() {}
 
+void HeaderView::setMainWindow(MainWindow* window) {
+    mainWindow = window;
+}
+
 void HeaderView::updateView() {
 }
 
@@ -36,5 +41,5 @@ Gtk::HBox* HeaderView::getHeaderView() {
 }
 
 void HeaderView::onStartClicked() {
-    cout << "start clicked" << endl;
+    mainWindow->startGame();
 }

@@ -16,6 +16,7 @@ using namespace std;
 MainWindow::MainWindow() {
     tableView = new TableView(&deck);
     handView = new PlayerHandView(&deck);
+    headerView = new HeaderView();
 		
 	// Sets the border width of the window.
 	set_border_width( 25 );
@@ -28,7 +29,7 @@ MainWindow::MainWindow() {
 	// Add the frame to the window. Windows can only hold one widget, same for frames.
 	add( frame );
 
-	mainBox.pack_start(*headerView.getHeaderView());
+	mainBox.pack_start(*headerView->getHeaderView());
     mainBox.pack_start(*tableView->getViewBox());
 	mainBox.pack_start(*scoreView.getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());
@@ -39,7 +40,13 @@ MainWindow::MainWindow() {
 	// The final step is to display this newly created widget.
 	show_all();
 
-    startGame();
+    headerView->setMainWindow(this);
+}
+
+MainWindow::~MainWindow() {
+    delete tableView;
+    delete handView;
+    delete headerView;
 }
 
 void MainWindow::startGame() {
@@ -61,7 +68,4 @@ string MainWindow::invitePlayers() {
         choices += type;
     }
     return choices;
-}
-
-MainWindow::~MainWindow() {
 }

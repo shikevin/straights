@@ -9,23 +9,25 @@
 // #include "TableController.h"
 #include "playerselectiondialog.h"
 
+class HeaderView;
+
 class MainWindow : public Gtk::Window {
 public:
 	MainWindow();
 	~MainWindow();
+    void startGame();
     // newRound();
     // newGame();
 	
 private:
     string invitePlayers();
-    void startGame();
 	DeckGUI                         deck;             // Knows all of the card pixel buffers.
 	
     // TableController* gameLogic;
     TableView*                      tableView;
     PlayerHandView*                 handView;
     ScoreBoardView					scoreView;
-    HeaderView						headerView;
+    HeaderView*						headerView;
 	Gtk::Frame                      frame; 
 	Gtk::VBox           			mainBox;
 };

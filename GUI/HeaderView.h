@@ -10,8 +10,10 @@
 #include <gtkmm/dialog.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/entry.h>
+#include "mainwindow.h"
 #include "component.h"
 
+class MainWindow;
 
 class HeaderView : public Component {
 public:
@@ -19,10 +21,12 @@ public:
     virtual ~HeaderView();
     Gtk::HBox* getHeaderView();
     void updateView();
+    void setMainWindow(MainWindow*);
 	
 private:
     void onStartClicked();
 	int seed;             // store inputed seed		
+    MainWindow* mainWindow;
 	
 	// Member widgets:
 	Gtk::Button startButton;
