@@ -25,6 +25,7 @@ public:
 	
 private:
     void onStartClicked();
+    void onEndClicked();
 	int seed;             // store inputed seed		
     MainWindow* mainWindow;
 	
