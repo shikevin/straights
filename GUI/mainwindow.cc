@@ -95,14 +95,7 @@ void MainWindow::playerCommand(Command command) {
 }
 
 void MainWindow::displayDialog() {
-		Gtk::Dialog dialogBox("ILLEGAL PLAY", *this, true, true);
-		dialogBox.set_default_size(350,200);
-		Gtk::Label message("Legal Play Exists.\n\nAnd its not that one.");
-		dialogBox.get_vbox()->add(message);
-		dialogBox.add_button( Gtk::Stock::OK, Gtk::RESPONSE_OK);
-		//dialogBox.add_button(Gtk::Stock::OK);
-		dialogBox.show_all();
-		dialogBox.run();
+	generateDialog("ILLEGAL PLAY", "Legal Play Exists.\n\nAnd its not that one.",250,300);
 }
 
 void MainWindow::setGameState(GameState* a){
@@ -115,4 +108,58 @@ void MainWindow::setScoreboard(Scoreboard* a){
 
 void MainWindow::roundOver() {
     //information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
+	vector<Player*> playersInGame = gamestate->getPlayersInGame();
+	int playerName;
+	int numDiscards;
+	vector<Card*> discards;
+	int score;
+
+	string displayText= "\tROUND SUMMARY\n\n";
+
+	for(int i = 0; i < playersInGame.size(); i++) {
+		playerName = i+1;
+		numDiscards = playersInGame[i]->getNumDiscardedCards();
+		score = scoreboard->getCurrentScore(i);
+		discards = playersInGame[i]->getDiscardedCards();
+
+		displayText += generateRoundOverMessage(playerName, numDiscards, discards, score);
+	}
+
+	generateRoundOverDialog(displayText);	
+}
+
+void MainWindow::generateDialog(string title, string info, int width, int height) {
+	Gtk::Dialog dialogBox(title, *this, true, true);
+		dialogBox.set_default_size(width,height);
+		Gtk::Label message(info);
+		dialogBox.get_vbox()->add(message);
+		dialogBox.add_button( Gtk::Stock::OK, Gtk::RESPONSE_OK);
+		//dialogBox.add_button(Gtk::Stock::OK);
+		dialogBox.show_all();
+		dialogBox.run();
+}
+
+void MainWindow::generateRoundOverDialog(string displayText) {
+		generateDialog("ROUND OVER!",displayText,400,400);
+}
+
+string MainWindow::generateRoundOverMessage(int playerName, int numDiscards, vector<Card*> discards, int score) {
+	string message = "\n\n";
+	message += "Player " + to_string(playerName) + ":\n";
+	message += "Score: " + to_string(score) + "\n";
+	message += "Number of Discards: " + to_string(numDiscards) + "\n";
+	string discardedCards = getDiscardedCardsAsString(discards);
+	message += "Cards Discarded: " + discardedCards + "\n";
+	return message;
+}
+
+string MainWindow::getDiscardedCardsAsString(vector<Card*> discards) {
+	string result = "";
+	for(int i = 0; i < discards.size(); i++) {
+		stringstream cardString;
+		cardString << *discards[i];
+		result +=  cardString.str() +  " ";
+		cout << result << endl;
+	}
+	return result;
 }
