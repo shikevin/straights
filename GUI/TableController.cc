@@ -7,7 +7,8 @@
 
 using namespace std;
 
-TableController::TableController(vector<ViewComponent*> views) {
+TableController::TableController(vector<ViewComponent*> views, MainWindow* a) {
+    mainWindow = a;
     // input = new Input();
 	deck = new Deck(); // seed goes here
 	// playersInGame.reserve(4);
@@ -21,6 +22,8 @@ TableController::TableController(vector<ViewComponent*> views) {
         views[i]->setScoreboard(scoreboard);
         views[i]->setGameState(gameState);
     }
+    mainWindow->setGameState(gameState);
+    mainWindow->setScoreboard(scoreboard);
 	//currentPlayer = 0;
 }
 
@@ -61,7 +64,7 @@ void TableController::handleComputerMove() {
         Command command;
         command = generateComputerCommand();
         executeMove(command);
-        gameState->incrementPlayer();
+        nextPlayer();
     }
 }
 
@@ -73,8 +76,26 @@ void TableController::playerCommand(Command command) {
     Command validCommand = validation->validCommand(command, doesPlayableCardExist(), *deck, gameState->isFirstPlayer(), gameState->startCard);
 
     executeMove(validCommand);
-    gameState->incrementPlayer();
+    nextPlayer();
     handleComputerMove();
+}
+
+void TableController::nextPlayer() {
+    vector<Player*> players = gameState->getPlayersInGame();
+    if (!isRoundOver()) {
+        gameState->incrementPlayer();
+        return;
+    }
+
+    // round is over
+    for (int i = 0; i < players.size(); i++) {
+        players[i]->newRound();
+    }
+    mainWindow->roundOver();
+    // if (isGameOver()) {
+    //     // pass over victors
+    //     scoreboard->getLowestID();
+    // }
 }
 
 Command TableController::generateComputerCommand() {
