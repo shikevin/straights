@@ -11,6 +11,7 @@ MainWindow::MainWindow() {
     tableView = new TableView(&deck);
     handView = new PlayerHandView(&deck);
     headerView = new HeaderView();
+    scoreView = new ScoreBoardView();
 		
 	// Sets the border width of the window.
 	set_border_width( 25 );
@@ -25,11 +26,11 @@ MainWindow::MainWindow() {
 
 	mainBox.pack_start(*headerView->getHeaderView());
     mainBox.pack_start(*tableView->getViewBox());
-	mainBox.pack_start(*scoreView.getScoreBox());
+	mainBox.pack_start(*scoreView->getScoreBox());
 	mainBox.pack_start(*handView->getViewBox());
 
     components.push_back(dynamic_cast<ViewComponent*>(tableView));
-    components.push_back(dynamic_cast<ViewComponent*>(&scoreView));
+    components.push_back(dynamic_cast<ViewComponent*>(scoreView));
     components.push_back(dynamic_cast<ViewComponent*>(handView));
 
 	// Add the horizontal box for laying out the images to the frame.
@@ -45,6 +46,7 @@ MainWindow::MainWindow() {
     tableView->setMainWindow(this);
     handView->setMainWindow(this);
     headerView->setMainWindow(this);
+    scoreView->setMainWindow(this);
 }
 
 MainWindow::~MainWindow() {

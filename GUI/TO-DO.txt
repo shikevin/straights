@@ -3,3 +3,4 @@
 3. game handling beginning to end
 4. add labels (ex. your hand)
 5. bonus marks?
+6. handle graceful quit (exit the game)

@@ -22,14 +22,14 @@ PlayerHandView::PlayerHandView(DeckGUI* deckPointer) : ViewComponent(), table( 1
     }
 	
 	for (int i = 0; i < 13; i++) {
-    buttons[i].signal_clicked().connect(
-                sigc::bind(
-									sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
-									i));
-      table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
-      //table.attach(object, left, right, top, bottom);
-    buttons[i].set_sensitive(false);
-	buttons[i].hide();
+        buttons[i].signal_clicked().connect(
+                    sigc::bind(
+                                        sigc::mem_fun( *this, &PlayerHandView::onButtonClicked ),
+                                        i));
+          table.attach(buttons[i], i % 13, (i % 13) + 1, i / 13, (i / 13) + 1);
+          //table.attach(object, left, right, top, bottom);
+        buttons[i].set_sensitive(false);
+        buttons[i].hide();
 	}
 	
 }

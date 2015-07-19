@@ -13,6 +13,7 @@
 class PlayerHandView;
 class HeaderView;
 class TableView;
+class ScoreBoardView;
 
 class MainWindow : public Gtk::Window {
 public:
@@ -31,7 +32,7 @@ private:
     TableController* gameLogic;
     TableView*                      tableView;
     PlayerHandView*                 handView;
-    ScoreBoardView					scoreView;
+    ScoreBoardView*					scoreView;
     HeaderView*						headerView;
 	Gtk::Frame                      frame; 
 	Gtk::VBox           			mainBox;
