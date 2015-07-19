@@ -20,20 +20,20 @@ public:
 //    std::string getCurrentPlayerType();
 //	void updateCurrentPlayer( Player*);
 	std::vector<Player*> getPlayersInGame();
-    void newGame();
+    void newRound();
     void rageQuitPlayer();
     Player* getCurrentPlayer() const;
     bool isFirstPlayer() const;
     std::string getPlayerType();
     void incrementPlayer();
     static const Card startCard;
+    void notify();
 //    void nextPlayer();
 
 private:
 	int currentPlayer;
 	std::vector<Player*> playersInGame;
     void findFirstPlayer();
-    void notify();
     std::vector<ViewComponent*> myViewComponents;
     bool firstPlayer;
 //    int currentPlayer;

@@ -27,6 +27,7 @@ public:
     void startGame(int);
     void playerCommand(Command);
     void roundOver();
+    void gameOver();
     void setScoreboard(Scoreboard*);
     void setGameState(GameState*);
     // newRound();
