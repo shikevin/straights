@@ -108,6 +108,17 @@ void MainWindow::setScoreboard(Scoreboard* a){
 
 void MainWindow::gameOver() {
     //information->printWinner(scoreboard->getLowestID());
+    vector<int> winners = scoreboard->getLowestID();
+    for(int i = 0; i < winners.size(); i++) {
+    	string message;
+    	if(winners.size() == 1) {
+    		message = "Player "+ to_string(i+1) + " wins!";
+    	} else { 
+    		message = "Player "+ to_string(i+1) + " is a winner!";
+    	}
+    	generateDialog("GAME OVER!", message, 300,200);
+    }
+
 }
 
 void MainWindow::roundOver() {
