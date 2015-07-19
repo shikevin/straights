@@ -23,6 +23,7 @@ for(int i = 0; i < NUM_PLAYERS; i++) {
 
 	
 	scoresBox.pack_start(playerBoxes[i]);
+    rageButtons[i].set_sensitive(false);
 }
 
 	scoresBox.show();
@@ -32,23 +33,20 @@ ScoreBoardView::~ScoreBoardView() {}
 
 void ScoreBoardView::updateView() {
 	//update labels for each of the boxes
+    vector<Player*> players = gamestate->getPlayersInGame();
 
-	//query gamestate for current player's numdiscards 
-	//query scoreboard for currentplayer's score
-	Player* currentPlayer = gamestate->getCurrentPlayer();
+    // upate the view
+    for (int i = 0; i < players.size(); i++) {
+        int currentScore = scoreboard->getCurrentScore(i);
+        int numDiscards = players[i]->getNumDiscardedCards();
+        string result = generateLabelMessage(i,currentScore,numDiscards);
+        playerStats[i].set_text(result);
 
-	int playerID = currentPlayer->getPlayerID();
-	int currentScore = scoreboard->getCurrentScore(playerID);
-	int numDiscards = currentPlayer->getNumDiscardedCards();
-
-	string result = generateLabelMessage(playerID,currentScore,numDiscards);
-	playerStats[playerID].set_text(result);
-	cout << "Segfault 2" << endl;
+    }
 }
 
 string ScoreBoardView::generateLabelMessage(int playerID, int playerScore, int numDiscards) {
 
-	cout << "Segfault " << endl;
 	
 	string player ="\nPlayer ";
 	string score = "\nScore: ";
@@ -57,10 +55,11 @@ string ScoreBoardView::generateLabelMessage(int playerID, int playerScore, int n
 	stringstream playerInfo;
 	playerInfo << player << playerID+1 << score << playerScore << discards << numDiscards << endl;
 	string result = playerInfo.str();
-cout << "Segfault 1" << endl;
 	return result;
 
 }
+
+// enable rage button if it is your turn
 
 Gtk::HBox* ScoreBoardView::getScoreBox() {
 	return &scoresBox;

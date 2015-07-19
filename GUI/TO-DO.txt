@@ -1,4 +1,5 @@
 1. error handling dialog boxes
-2. game handling beginning to end
-3. add labels (ex. your hand)
-4. bonus marks?
+2. segfaults when start game with new seed
+3. game handling beginning to end
+4. add labels (ex. your hand)
+5. bonus marks?
