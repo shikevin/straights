@@ -1,6 +1,5 @@
 #ifndef SCOREBOADVIEW_H
 #define SCOREBOADVIEW_H
-#include <vector>
 #include <gtkmm/window.h>
 #include <gtkmm/image.h>
 #include <gtkmm/box.h>
@@ -24,22 +23,11 @@ private:
 	// Member widgets:
 	Gtk::Button rageButtons[4];      		// buttons responsible for raging
 
-	Gtk::Label player1Label;
-	Gtk::Label player2Label;
-	Gtk::Label player3Label;
-	Gtk::Label player4Label;
-
-
-std::vector<Gtk::Label> labels;
-//std::vector<Gtk::VBox> playerBoxes;
-
-	Gtk::VBox player1Box;
-	Gtk::VBox player2Box;
-	Gtk::VBox player3Box;
-	Gtk::VBox player4Box;
-
-
+	Gtk::Label playerStats[NUM_PLAYERS];
+	Gtk::VBox playerBoxes[NUM_PLAYERS];
 	Gtk::HBox scoresBox;             // Horizontal box for aligning player button's boxes.
+
+	std::string generateLabelMessage( int , int , int );
 
 };
 
