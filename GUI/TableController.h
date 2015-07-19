@@ -10,10 +10,11 @@
 #include "component.h"
 #include "GameState.h"
 #include "validate.h"
+#include "mainwindow.h"
 
 class TableController {
 public:
-	TableController(std::vector<ViewComponent*>);
+	TableController(std::vector<ViewComponent*>, MainWindow*);
     ~TableController();
     void playGame(int, std::string choices);
     void playerCommand(Command);
@@ -31,10 +32,12 @@ private:
     Command generateComputerCommand();
    // Command getHumanInput(bool, bool);
     void handleComputerMove();
+    void nextPlayer();
     bool doesPlayableCardExist();
 	Deck* deck;
 	Scoreboard* scoreboard;
     Validate* validation;
     GameState* gameState;
+    MainWindow* mainWindow;
 };
 #endif

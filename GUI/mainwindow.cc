@@ -59,7 +59,7 @@ MainWindow::~MainWindow() {
 void MainWindow::startGame(int seed) {
     string choices = invitePlayers();
     if (gameLogic == NULL) {
-        gameLogic = new TableController(components);
+        gameLogic = new TableController(components, this);
     }
     gameLogic->playGame(seed, choices);
 }
@@ -90,4 +90,16 @@ void MainWindow::playerCommand(Command command) {
         playerCommand(command);
     } catch (Validate::PrintDeckException &e) {
     }
+}
+
+void MainWindow::setGameState(GameState* a){
+    gamestate = a;
+}
+
+void MainWindow::setScoreboard(Scoreboard* a){
+    scoreboard = a;
+}
+
+void MainWindow::roundOver() {
+    //information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
 }

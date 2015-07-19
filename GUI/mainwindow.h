@@ -6,7 +6,10 @@
 #include "tableview.h"
 #include "ScoreBoardView.h"
 #include "HeaderView.h"
+#include "GameState.h"
 #include "TableController.h"
+#include "Scoreboard.h"
+#include "Player.h"
 #include "playerselectiondialog.h"
 #include "component.h"
 
@@ -14,6 +17,8 @@ class PlayerHandView;
 class HeaderView;
 class TableView;
 class ScoreBoardView;
+class GameState;
+class TableController;
 
 class MainWindow : public Gtk::Window {
 public:
@@ -21,6 +26,9 @@ public:
 	~MainWindow();
     void startGame(int);
     void playerCommand(Command);
+    void roundOver();
+    void setScoreboard(Scoreboard*);
+    void setGameState(GameState*);
     // newRound();
     // newGame();
 	
@@ -30,6 +38,8 @@ private:
     std::vector<ViewComponent*> components;
 	
     TableController* gameLogic;
+    Scoreboard* scoreboard;
+    GameState* gamestate;
     TableView*                      tableView;
     PlayerHandView*                 handView;
     ScoreBoardView*					scoreView;
