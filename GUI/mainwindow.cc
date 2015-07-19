@@ -85,9 +85,22 @@ void MainWindow::playerCommand(Command command) {
         // handle quit
     } catch (Validate::LegalPlayExistsException &e) {
         // tell user to use the right card
+    	displayDialog();
+		return;
     } catch (Validate::IllegalPlayException &e) {
         command.type = DISCARD;
         playerCommand(command);
     } catch (Validate::PrintDeckException &e) {
     }
+}
+
+void MainWindow::displayDialog() {
+		Gtk::Dialog dialogBox("ILLEGAL PLAY", *this, true, true);
+		dialogBox.set_default_size(350,200);
+		Gtk::Label message("Legal Play Exists.\n\nAnd its not that one.");
+		dialogBox.get_vbox()->add(message);
+		dialogBox.add_button( Gtk::Stock::OK, Gtk::RESPONSE_OK);
+		//dialogBox.add_button(Gtk::Stock::OK);
+		dialogBox.show_all();
+		dialogBox.run();
 }

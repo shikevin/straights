@@ -26,6 +26,7 @@ public:
 	
 private:
     string invitePlayers();
+    void displayDialog();
 	DeckGUI                         deck;             // Knows all of the card pixel buffers.
     std::vector<ViewComponent*> components;
 	
