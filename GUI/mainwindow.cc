@@ -112,9 +112,9 @@ void MainWindow::gameOver() {
     for(int i = 0; i < winners.size(); i++) {
     	string message;
     	if(winners.size() == 1) {
-    		message = "Player "+ to_string(i+1) + " wins!";
+    		message = "Player "+ to_string(winners[i] + 1) + " wins!";
     	} else { 
-    		message = "Player "+ to_string(i+1) + " is a winner!";
+    		message = "Player "+ to_string(winners[i] + 1) + " is a winner!";
     	}
     	generateDialog("GAME OVER!", message, 300,200);
     }
