@@ -59,6 +59,10 @@ void PlayerHandView::onButtonClicked(int i) {
 
 void PlayerHandView::displayCards(Player* currentPlayer) {
     vector<Card*> playerCards = currentPlayer->getCardsInHand();
+    for (int j = 0; j < playerCards.size(); j++) {
+        cout << *playerCards[j];
+    }
+    cout << endl;
     for (int i = 0; i < 13; i++) {
         buttons[i].set_sensitive(true);
         if (i < playerCards.size()) {

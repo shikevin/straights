@@ -86,13 +86,13 @@ void TableController::nextPlayer() {
         gameState->incrementPlayer();
         return;
     }
+    gameState->notify();
     mainWindow->roundOver();
     // round is over
     for (int i = 0; i < players.size(); i++) {
         players[i]->newRound();
     }
     if (isGameOver()) {
-        gameState->notify();
         mainWindow->gameOver();
         return;
     }
