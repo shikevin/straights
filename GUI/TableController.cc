@@ -87,11 +87,12 @@ void TableController::nextPlayer() {
         return;
     }
 
+    mainWindow->roundOver();
+ 
     // round is over
     for (int i = 0; i < players.size(); i++) {
         players[i]->newRound();
     }
-    mainWindow->roundOver();
     // if (isGameOver()) {
     //     // pass over victors
     //     scoreboard->getLowestID();
