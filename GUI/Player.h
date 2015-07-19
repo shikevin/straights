@@ -22,6 +22,7 @@ public:
 	void discard(Card*);
     bool hasCard(const Card&);
 	std::string getPlayerType(); // "h" v. "c"
+	int getNumDiscardedCards();
 	int getPlayerID();
 	void addCardToHand(Card*);
     void newRound();
