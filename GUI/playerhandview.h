@@ -28,9 +28,8 @@ private:
 	DeckGUI*                         deckGUI;             // Knows all of the card pixel buffers.
     	
 	// Member widgets:
-    Gtk::Image * cards[SUIT_COUNT][RANK_COUNT];          // Images to display.
+    Gtk::Image * cardsInHand[13];
 	Gtk::Button buttons[13];
-    Gtk::Image * nullCards[13];
 	Gtk::Table                       table;             // Horizontal box for aligning widgets in the window.
 
 

@@ -19,6 +19,13 @@ void Scoreboard::newRound() {
     }
 }
 
+void Scoreboard::newGame() {
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        allScores_[i] = 0;
+        newScores_[i] = 0;
+    }
+}
+
 int Scoreboard::getCurrentScore(int player) {
     return newScores_[player];
 }

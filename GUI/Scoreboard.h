@@ -14,6 +14,7 @@ public:
     int getOldScore(int player);
     void newRound();
     std::vector<int> getLowestID();
+    void newGame();
     
 private:
     static const int MAX_PLAYERS = 4;

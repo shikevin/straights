@@ -9,10 +9,7 @@ using namespace std;
 
 TableController::TableController(vector<ViewComponent*> views, MainWindow* a) {
     mainWindow = a;
-    // input = new Input();
 	deck = new Deck(); // seed goes here
-	// playersInGame.reserve(4);
-    // information = new Print();
 	scoreboard = new Scoreboard();
     gameState = new GameState();
     validation = new Validate();
@@ -24,7 +21,6 @@ TableController::TableController(vector<ViewComponent*> views, MainWindow* a) {
     }
     mainWindow->setGameState(gameState);
     mainWindow->setScoreboard(scoreboard);
-	//currentPlayer = 0;
 }
 
 TableController::~TableController() {
@@ -41,7 +37,7 @@ TableController::~TableController() {
 void TableController::playGame(int seed, string choices) {
     gameState->initializePlayers(choices);
     deck->setSeed(seed);
-    scoreboard->newRound();
+    scoreboard->newGame();
     deck->newRound();
     distributeCards();
     gameState->newRound();
@@ -94,6 +90,7 @@ void TableController::nextPlayer() {
     }
     if (isGameOver()) {
         mainWindow->gameOver();
+        scoreboard->newGame();
         return;
     }
     scoreboard->newRound();
