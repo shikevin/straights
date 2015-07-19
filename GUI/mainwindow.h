@@ -36,7 +36,7 @@ public:
 private:
     string invitePlayers();
     void displayDialog();
-    string generateRoundOverMessage(int , int , vector<Card*> , int );
+    string generateRoundOverMessage(int , int , vector<Card*> , int , int);
     string getDiscardedCardsAsString(vector<Card*>);
     void generateDialog(string , string , int , int );
     void generateRoundOverDialog(string );
