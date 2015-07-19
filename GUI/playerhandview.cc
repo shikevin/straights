@@ -71,9 +71,7 @@ void PlayerHandView::displayCards(Player* currentPlayer) {
 }
 void PlayerHandView::updateView() {
     Player* currentPlayer = gamestate->getCurrentPlayer();
-    if (currentPlayer->getPlayerType() == "h") {
-        displayCards(currentPlayer);
-    }
+    displayCards(currentPlayer);
 }
 
 void PlayerHandView::setMainWindow(MainWindow* a) {

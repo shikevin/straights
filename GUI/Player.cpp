@@ -49,13 +49,11 @@ void Player::newRound() {
 
 int Player::getNumDiscardedCards() {
     int counter = 0;
-    cout << "Segfault 4" << endl;
     for(int i = 0; i < cardsDiscarded.size(); i++) {
         if(cardsDiscarded[i]) {
             counter++;
         }
     }
-    cout << "Segfault 5" << endl;
     return counter;
 }
 
