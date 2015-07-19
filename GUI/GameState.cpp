@@ -57,8 +57,7 @@ void GameState::findFirstPlayer() {
     currentPlayer = -1;
 }
 
-void GameState::newGame() {
-    cout << "playerlist size: " << playersInGame.size() << endl;
+void GameState::newRound() {
     firstPlayer = true;
     findFirstPlayer();
     notify();
@@ -95,7 +94,6 @@ Player* GameState::getCurrentPlayer() const{
 vector<Player*> GameState::getPlayersInGame() {
     return playersInGame;
 }
-
 // 
 // int GameState::getCurrentPlayerID() {
 // 	return currentPlayer->getPlayerID();

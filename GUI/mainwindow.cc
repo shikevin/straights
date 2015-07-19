@@ -106,6 +106,10 @@ void MainWindow::setScoreboard(Scoreboard* a){
     scoreboard = a;
 }
 
+void MainWindow::gameOver() {
+    //information->printWinner(scoreboard->getLowestID());
+}
+
 void MainWindow::roundOver() {
     //information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
 	vector<Player*> playersInGame = gamestate->getPlayersInGame();

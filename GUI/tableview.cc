@@ -61,6 +61,9 @@ void TableView::updateView() {
         for (unsigned rank = ACE; rank < RANK_COUNT; ++rank) {
             if (deck->isCardOnTable(Card((Suit)suit,(Rank)rank))) {
                 buttons[suit][rank].set_image(*card[suit][rank]);
+            } else {
+                buttons[suit][rank].set_image(
+                buttons[suit][rank].set_image(*nullCards[suit][rank]);
             }
         }
     }

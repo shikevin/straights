@@ -34,6 +34,7 @@ private:
     void handleComputerMove();
     void nextPlayer();
     bool doesPlayableCardExist();
+    bool isGameOver();
 	Deck* deck;
 	Scoreboard* scoreboard;
     Validate* validation;

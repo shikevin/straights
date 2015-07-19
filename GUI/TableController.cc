@@ -44,7 +44,7 @@ void TableController::playGame(int seed, string choices) {
     scoreboard->newRound();
     deck->newRound();
     distributeCards();
-    gameState->newGame();
+    gameState->newRound();
     handleComputerMove();
 }
 
@@ -86,17 +86,20 @@ void TableController::nextPlayer() {
         gameState->incrementPlayer();
         return;
     }
-
     mainWindow->roundOver();
- 
     // round is over
     for (int i = 0; i < players.size(); i++) {
         players[i]->newRound();
     }
-    // if (isGameOver()) {
-    //     // pass over victors
-    //     scoreboard->getLowestID();
-    // }
+    if (isGameOver()) {
+        gameState->notify();
+        mainWindow->gameOver();
+        return;
+    }
+    scoreboard->newRound();
+    deck->newRound();
+    distributeCards();
+    gameState->newRound();
 }
 
 Command TableController::generateComputerCommand() {
@@ -158,14 +161,14 @@ void TableController::distributeCards() {
     }
 }
 
-// bool Table::isGameOver() {
-//     for (int i=0; i<playersInGame.size(); i++) {
-//         if (scoreboard->getCurrentScore(i) + scoreboard->getOldScore(i) >= 80) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+bool TableController::isGameOver() {
+    for (int i=0; i<gameState->getPlayersInGame().size(); i++) {
+        if (scoreboard->getCurrentScore(i) + scoreboard->getOldScore(i) >= 80) {
+            return true;
+        }
+    }
+    return false;
+}
 // 
 // 
 // void Table::playGame(string choices) {
