@@ -116,17 +116,19 @@ void MainWindow::roundOver() {
 	int playerName;
 	int numDiscards;
 	vector<Card*> discards;
-	int score;
+	int totalScore;
+	int roundScore;
 
 	string displayText= "\tROUND SUMMARY\n\n";
 
 	for(int i = 0; i < playersInGame.size(); i++) {
 		playerName = i+1;
 		numDiscards = playersInGame[i]->getNumDiscardedCards();
-		score = scoreboard->getCurrentScore(i);
+		roundScore = scoreboard->getCurrentScore(i);
+		totalScore = scoreboard->getOldScore(i) + roundScore;
 		discards = playersInGame[i]->getDiscardedCards();
 
-		displayText += generateRoundOverMessage(playerName, numDiscards, discards, score);
+		displayText += generateRoundOverMessage(playerName, numDiscards, discards, totalScore, roundScore);
 	}
 
 	generateRoundOverDialog(displayText);	
@@ -147,13 +149,14 @@ void MainWindow::generateRoundOverDialog(string displayText) {
 		generateDialog("ROUND OVER!",displayText,400,400);
 }
 
-string MainWindow::generateRoundOverMessage(int playerName, int numDiscards, vector<Card*> discards, int score) {
+string MainWindow::generateRoundOverMessage(int playerName, int numDiscards, vector<Card*> discards, int totalScore, int roundScore) {
 	string message = "\n\n";
 	message += "Player " + to_string(playerName) + ":\n";
-	message += "Score: " + to_string(score) + "\n";
+	message += "Round Score: " + to_string(roundScore) + "\n";
 	message += "Number of Discards: " + to_string(numDiscards) + "\n";
 	string discardedCards = getDiscardedCardsAsString(discards);
-	message += "Cards Discarded: " + discardedCards + "\n";
+	message += "Cards Discarded: " + discardedCards + "\n\n";
+	message += "Total Score: " + to_string(totalScore);
 	return message;
 }
 
