@@ -7,7 +7,8 @@
 using namespace std;
 
 // This will zero initiate the scores
-Deck::Deck(int seed): seed_(seed) {
+Deck::Deck() {
+    seed_ = 0;
     Card* newCard;
     int i = 0;
     for (unsigned suit=CLUB; suit <= SPADE; ++suit) {
@@ -28,6 +29,10 @@ Deck::~Deck() {
 
 vector<Card*> Deck::getDeck() const {
     return allCards_;
+}
+
+void Deck::setSeed(int seed) {
+    seed_ = seed;
 }
 
 void Deck::newRound() {

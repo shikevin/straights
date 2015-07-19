@@ -57,14 +57,11 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::startGame(int seed) {
-    if (gameLogic != NULL) {
-        delete gameLogic;
-        gameLogic = NULL;
-    }
     string choices = invitePlayers();
-    cout << "seed is: " << seed << endl;
-    gameLogic = new TableController(seed, components);
-    gameLogic->playGame(choices);
+    if (gameLogic == NULL) {
+        gameLogic = new TableController(components);
+    }
+    gameLogic->playGame(seed, choices);
 }
 
 string MainWindow::invitePlayers() {

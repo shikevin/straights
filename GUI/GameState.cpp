@@ -16,6 +16,13 @@ GameState::~GameState() {
 }
 
 void GameState::initializePlayers(string choices) {
+    // destruct old players
+    for (int i = 0; i < playersInGame.size(); i++) {
+        delete playersInGame[i];
+    }
+    playersInGame.clear();
+
+    // create new ones
 	for(int i = 0; i < choices.size(); i++) {
 		if(choices.at(i) == 'h') {
 			HumanPlayer* human = new HumanPlayer("h");
@@ -51,6 +58,7 @@ void GameState::findFirstPlayer() {
 }
 
 void GameState::newGame() {
+    cout << "playerlist size: " << playersInGame.size() << endl;
     firstPlayer = true;
     findFirstPlayer();
     notify();
@@ -87,6 +95,7 @@ Player* GameState::getCurrentPlayer() const{
 vector<Player*> GameState::getPlayersInGame() {
     return playersInGame;
 }
+
 // 
 // int GameState::getCurrentPlayerID() {
 // 	return currentPlayer->getPlayerID();

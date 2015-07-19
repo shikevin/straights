@@ -7,9 +7,9 @@
 
 using namespace std;
 
-TableController::TableController(int seed, vector<ViewComponent*> views) {
+TableController::TableController(vector<ViewComponent*> views) {
     // input = new Input();
-	deck = new Deck(seed); // seed goes here
+	deck = new Deck(); // seed goes here
 	// playersInGame.reserve(4);
     // information = new Print();
 	scoreboard = new Scoreboard();
@@ -35,8 +35,9 @@ TableController::~TableController() {
     scoreboard = NULL;
 }
 
-void TableController::playGame(string choices) {
+void TableController::playGame(int seed, string choices) {
     gameState->initializePlayers(choices);
+    deck->setSeed(seed);
     scoreboard->newRound();
     deck->newRound();
     distributeCards();
@@ -182,10 +183,6 @@ void TableController::distributeCards() {
 //                 isFirstPlayer = false;
 //             }
 // 
-//             for (int i = 0; i < playersInGame.size(); i++) {
-//                 information->printPlayerResults(i, scoreboard->getOldScore(i), scoreboard->getCurrentScore(i), playersInGame[i]->getDiscardedCards());
-//                 playersInGame[i]->newRound();
-//             }
 //         }
 //         if (isGameOver()) {
 //             information->printWinner(scoreboard->getLowestID());

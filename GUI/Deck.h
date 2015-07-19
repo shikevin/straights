@@ -8,12 +8,13 @@
 
 class Deck{
 public:
-    Deck(int);
+    Deck();
     ~Deck();
     void play(Card*);
     Card* getCard(const Card&);
     void newRound();
     std::vector<Card*> getDeck() const;
+    void setSeed(int);
 
     friend std::ostream& operator<< (std::ostream&, const Deck&);
     bool isCardPlayable(const Card&) const;

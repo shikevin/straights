@@ -13,9 +13,9 @@
 
 class TableController {
 public:
-	TableController(int, std::vector<ViewComponent*>);
+	TableController(std::vector<ViewComponent*>);
     ~TableController();
-    void playGame(std::string choices);
+    void playGame(int, std::string choices);
     void playerCommand(Command);
 
 private:
