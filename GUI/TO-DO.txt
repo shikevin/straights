@@ -1,0 +1,4 @@
+1. error handling dialog boxes
+2. game handling beginning to end
+3. add labels (ex. your hand)
+4. bonus marks?
