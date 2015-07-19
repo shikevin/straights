@@ -12,6 +12,7 @@ MainWindow::MainWindow() {
     handView = new PlayerHandView(&deck);
     headerView = new HeaderView();
     scoreView = new ScoreBoardView();
+    gameLogic = NULL;
 		
 	// Sets the border width of the window.
 	set_border_width( 25 );
@@ -56,10 +57,13 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::startGame(int seed) {
-    cout << "hasn't failed yet" << endl;
+    if (gameLogic != NULL) {
+        delete gameLogic;
+        gameLogic = NULL;
+    }
     string choices = invitePlayers();
+    cout << "seed is: " << seed << endl;
     gameLogic = new TableController(seed, components);
-    cout << "hasn't failed yet" << endl;
     gameLogic->playGame(choices);
 }
 
@@ -69,12 +73,9 @@ string MainWindow::invitePlayers() {
         string title = "Choose Type: Player " + to_string(i + 1);
         char type;
         do {
-            cout << "fail 1" << endl;
             PlayerSelectionDialog selection(*this, title);
-            cout << "fail 2" << endl;
             type = selection.getChoice();
         } while (type == 'n');
-        cout << "Type for : " << i << " is "<< type << endl;
         choices += type;
     }
     return choices;

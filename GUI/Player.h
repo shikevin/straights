@@ -35,6 +35,7 @@ protected:
 	std::vector<Card*> cardsDiscarded;
     static int next_;
 	int playerID; //0..3
+    void incrementNext();
 };
 
 

@@ -7,7 +7,8 @@ using namespace std;
 int Player::next_ = 0;
 
 Player::Player(string playerType) : type(playerType) {
-    playerID = next_++;
+    playerID = next_;
+    incrementNext();
 	cardsInHand.reserve(13);
 	cardsDiscarded.reserve(13);
 }
@@ -78,4 +79,9 @@ bool Player::hasCard(const Card& card) {
         }
     }
     return false;
+}
+
+void Player::incrementNext() {
+    next_++;
+    next_ = next_ % 4;
 }
