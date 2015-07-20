@@ -10,7 +10,6 @@
 #include "TableController.h"
 #include "Scoreboard.h"
 #include "Player.h"
-#include "include/irrKlang.h"
 #include "playerselectiondialog.h"
 #include "component.h"
 
@@ -53,7 +52,6 @@ private:
     HeaderView*						headerView;
 	Gtk::Frame                      frame; 
 	Gtk::VBox           			mainBox;
-    irrklang::ISoundEngine*         engine;
 };
 
 #endif
