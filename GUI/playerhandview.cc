@@ -1,6 +1,7 @@
 #include "playerhandview.h"
 #include <iostream>
 #include "Command.h"
+#include <gdkmm/rgba.h>
 #include <string>
 #include <sstream>
 
@@ -48,9 +49,21 @@ void PlayerHandView::onButtonClicked(int i) {
 
 void PlayerHandView::displayCards(Player* currentPlayer) {
     vector<Card*> playerCards = currentPlayer->getCardsInHand();
+    cout << "playable cards: ";
+    Gdk::Color red;
+    red.parse("red");
     for (int i = 0; i < playerCards.size(); i++) {
+        if (gamestate->isFirstPlayer()) {
+            if (*playerCards[i] == gamestate->startCard) {
+                cardsInHand[i]->modify_bg(Gtk::StateType::STATE_NORMAL, red);
+                cout << *playerCards[i] << " ";
+            }
+        } else if (deck->isCardPlayable(*playerCards[i])) {
+            cout << *playerCards[i];
+        }
         cardsInHand[i]->set(deckGUI->getCardImage(Card((Suit)playerCards[i]->getSuit(),(Rank)playerCards[i]->getRank())));
     }
+    cout << endl;
 
     for (int i = 0; i < 13; i++) {
         buttons[i].set_sensitive(true);
