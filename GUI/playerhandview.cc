@@ -57,6 +57,8 @@ void PlayerHandView::displayCards(Player* currentPlayer) {
             if (*playerCards[i] == gamestate->startCard) {
                 cardsInHand[i]->modify_bg(Gtk::StateType::STATE_NORMAL, red);
                 cout << *playerCards[i] << " ";
+            } else {
+
             }
         } else if (deck->isCardPlayable(*playerCards[i])) {
             cout << *playerCards[i];
