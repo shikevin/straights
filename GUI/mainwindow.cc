@@ -12,6 +12,8 @@ MainWindow::MainWindow() {
     handView = new PlayerHandView(&deck);
     headerView = new HeaderView();
     scoreView = new ScoreBoardView();
+    engine = irrklang::createIrrKlangDevice();
+    engine->play2D("music.mp3", true);
     gameLogic = NULL;
 		
 	// Sets the border width of the window.
@@ -51,6 +53,7 @@ MainWindow::MainWindow() {
 }
 
 MainWindow::~MainWindow() {
+    engine->drop();
     delete tableView;
     delete handView;
     delete headerView;
